@@ -1,0 +1,52 @@
+.my-companies-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 5% 5%;
+}
+
+.my-companies-header {
+    margin: 5% 5% 0 5%;
+}
+
+.my-companies-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 3% 0 0 0;
+    gap: 10px 20px;
+}
+
+.my-companies-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: floralwhite;
+    color: #181D31;
+    border: solid 2px #D3AC2B;
+    border-radius: 3px;
+    margin: 2% 2% 2% 2%;
+    padding: 2% 2% 2% 2%;
+    min-height: 15rem;
+    min-width: 15rem;
+    flex: 0 0 0;
+    transition: 0.5s;
+}
+
+.my-companies-card:hover {
+    cursor: pointer;
+    transform: translateY(-1rem);
+    transition: 0.5s;
+}
+
+.my-companies-hr-line {
+    margin-top: 3%;
+    width: 100%;
+    height: 2px;
+    border: 1px solid #D3AC2B;
+    border-radius: 5px;
+    background: #D3AC2B;
+}

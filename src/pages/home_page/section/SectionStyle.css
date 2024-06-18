@@ -1,0 +1,67 @@
+.section-container-one {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 60rem;
+  background: url(../../../resources/images/home_page/home_page_1.jpg) no-repeat fixed;
+  background-size: cover;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.section-container-two {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: stretch;
+  height: 60rem;
+  background: url(../../../resources/images/home_page/home_page_2.jpg) no-repeat fixed;
+  background-size: cover;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.section-container-three {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 60rem;
+  background: url(../../../resources/images/home_page/home_page_3.jpg) no-repeat fixed;
+  background-size: cover;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.section-container-four {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: stretch;
+  height: 60rem;
+  background: url(../../../resources/images/home_page/home_page_4.jpg) no-repeat fixed;
+  background-size: cover;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.container-text-one,
+.container-text-two,
+.container-text-three,
+.container-text-four {
+  font-size: 140%;
+  margin: 19% 5% 5% 5%;
+  width: 50%;
+  color: snow;
+}
+
+.container-text-one,
+.container-text-three {
+  text-align: left;
+}
+
+.container-text-two,
+.container-text-four {
+  text-align: right;
+}

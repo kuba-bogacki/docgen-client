@@ -1,0 +1,158 @@
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    background: url(../../resources/images/user_profile/user_profile_page.jpg) no-repeat fixed;
+    background-size: cover;
+    overflow: hidden;
+    opacity: 0.9;
+}
+
+.current-user-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 8rem 1rem 4rem 1rem;
+    padding: 0 10% 0 10%;
+}
+
+.current-user-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 1rem 3rem 1rem;
+}
+
+.current-user-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    border: solid 2px #D3AC2B;
+    border-radius: 3px;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    padding: 2% 1% 2% 1%;
+    margin: 2% 1% 2% 1%;
+    min-height: 15rem;
+    min-width: 15rem;
+    flex: 0 0 0;
+}
+
+.current-user-left-aside {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 2% 2% 2%;
+    margin: 2% 2% 2% 2%;
+    width: 30%;
+}
+
+.current-user-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+    padding: 2% 2% 2% 2%;
+    margin: 2% 2% 2% 2%;
+}
+
+.current-user-company-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.current-user-right-aside {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.current-user-right-aside, .current-user-company-section {
+    padding: 2% 2% 2% 2%;
+    margin: 2% 2% 2% 2%;
+    background-color: floralwhite;
+    color: #181D31;
+    border: solid 2px #D3AC2B;
+    border-radius: 3px;
+}
+
+.user-profile-info-input {
+    max-width: 25%;
+}
+
+.user-profile-info-input:disabled {
+    font-size: 110%;
+    font-weight: bold;
+    font-family: Cambria, serif;
+    background-color: transparent;
+    color: #181D31;
+    border: none;
+    border-radius: 4px;
+    transition: 0.5s;
+}
+
+.user-profile-info-input:enabled {
+    font-size: 110%;
+    font-weight: bold;
+    font-family: Cambria, serif;
+    color: #0E1D35;
+    border: 2px solid #987d1a;
+    border-radius: 4px;
+}
+
+.user-profile-info-input:focus {
+    border-color: #987d1a;
+    border-radius: 4px;
+    outline: none;
+}
+
+.current-user-hr-line {
+    width: 45%;
+    height: 2px;
+    border: 1px solid #D3AC2B;
+    border-radius: 5px;
+    background: #D3AC2B;
+}
+
+.user-profile-edit-icon {
+    cursor: pointer;
+}
+
+.icon-rotated {
+    transform: rotate(45deg);
+}
+
+.photo-outer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 0 0;
+    padding: 0;
+}
+
+.user-photo-uploader {
+    transition: 0.5s;
+}
+
+.user-photo-uploader:hover {
+    cursor: pointer;
+    transform: translateY(10%);
+    transition: 0.5s;
+}
+
+.user-photo-inner {
+    width: 90px;
+    height: 90px;
+    border: 3px solid #D3AC2B;
+    border-radius: 50px;
+    transition: 1s;
+}
+
+#user-photo-input {
+    display: none;
+}

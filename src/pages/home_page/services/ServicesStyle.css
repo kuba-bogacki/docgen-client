@@ -1,0 +1,29 @@
+.services-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  /*height: 40rem;*/
+  min-height: 35rem;
+  height: 100%;
+  background-color: floralwhite;
+  background-size: cover;
+  padding-bottom: 2rem;
+}
+
+.services-container-header {
+  display: inline;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: #181D31;
+  padding: 2% 7% 2% 7%;
+}
+
+.services-hr-line {
+  width: 100%;
+  height: 2px;
+  border: 1px solid #D3AC2B;
+  border-radius: 5px;
+  background: #D3AC2B;
+}

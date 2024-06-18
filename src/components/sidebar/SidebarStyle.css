@@ -1,0 +1,88 @@
+.sidebar-container {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 18rem;
+    min-width: 11%;
+    height: 120%;
+    padding: 6rem 0.5rem 20rem 0.5rem;
+    transition: all 0.5s ease;
+    background: #0E1D35;
+    opacity: 0.9;
+}
+
+.sidebar-container-active {
+    width: 20rem;
+}
+
+.sidebar-list {
+    list-style-type: none;
+    width: 99%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.sidebar-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.sidebar-item {
+    display: block;
+    padding: 8px 15px 8px 15px;
+    align-items: flex-end;
+    color: floralwhite;
+    white-space: nowrap;
+    position: relative;
+}
+
+.sidebar-current-company {
+    display: block;
+    margin: 5% 0 5% 0;
+    padding: 5%;
+    align-items: flex-end;
+    color: floralwhite;
+    position: relative;
+    border-radius: 5px;
+}
+
+.sidebar-current-company-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.marked-section {
+    opacity: 0.8;
+    background-color: snow;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.marked-section h5,
+.marked-section h3 {
+    color: #0E1D35;
+}
+
+@media screen and (max-width: 1120px) {
+    .sidebar-container {
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        justify-content: flex-start;
+        width: 5%;
+        min-width: 5.5rem;
+        height: 100%;
+        padding: 6rem 0.5rem 8rem 0.5rem;
+        transition: all 0.5s ease;
+        background: #0E1D35;
+    }
+
+    .sidebar-item:nth-child(even) {
+        display: none;
+    }
+}

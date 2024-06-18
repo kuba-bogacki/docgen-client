@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-size: 1200% 1200%;
+  background-image: linear-gradient(-45deg, #2C74B3 0%, #205295 20%, #144272 80%, #0A2647 100%);
+  animation: AnimateBG 20s ease infinite;
+
+  font-size: calc(4px + 2vmin);
+  line-height: 1.8;
+  font-family: Cambria, serif;
+  color: snow;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes AnimateBG {
+  0%{background-position:0 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0 50%}
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #565656;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: floralwhite;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #987d1a;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::placeholder {
+  font-family: serif;
+}
+
+:-ms-input-placeholder {
+  font-family: serif;
+}
+
+::-ms-input-placeholder {
+  font-family: serif;
+}

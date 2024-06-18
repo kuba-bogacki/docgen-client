@@ -1,0 +1,62 @@
+.statute-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+  background: url(../../resources/images/statute/statute_page.jpg) no-repeat fixed;
+  background-size: cover;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.statute-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  margin: 8rem 1rem 4rem 1rem;
+}
+
+.statute-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 1rem 3rem 1rem;
+}
+
+.statute-paragraph {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 1rem 3rem 1rem 3rem;
+  padding: 1rem 3rem 1rem 3rem;
+  height: 100%;
+  background: rgba(24, 29, 49, 0.6 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 10px );
+  -webkit-backdrop-filter: blur( 10px );
+  border: 2px solid #D3AC2B;
+  border-radius: 3px;
+}
+
+ul.paragraph-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+}
+
+ul.paragraph-list li {
+  text-align: start;
+}
+
+.statute-hr-line {
+  width: 25%;
+  height: 2px;
+  border: 1px solid #D3AC2B;
+  border-radius: 5px;
+  background: #D3AC2B;
+}

@@ -1,0 +1,15 @@
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  /*margin: 0 0 2rem 0;*/
+  /*padding: 0 0 1rem 0;*/
+  /*background: rgba( 0, 166, 85, 0.15 );*/
+  /*box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );*/
+  /*backdrop-filter: blur( 5px );*/
+  /*-webkit-backdrop-filter: blur( 5px );*/
+  /*border-radius: 10px;*/
+  /*border: 3px solid rgba( 255, 255, 255, 0.18 );*/
+}

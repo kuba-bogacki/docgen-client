@@ -1,0 +1,45 @@
+.about-container, .about-block-container {
+  display: flex;
+  align-items: center;
+}
+
+.about-container {
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 25rem;
+  height: 100%;
+  background-color: floralwhite;
+  background-size: cover;
+}
+
+.about-block-container {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 1rem;
+}
+
+.about-block {
+  box-shadow: dimgrey 0 0 0.5rem 0.3rem;
+  width: 90%;
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  transition: 0.5s;
+}
+
+.about-block:hover {
+  transform: translateY(-1rem);
+  transition: 0.5s;
+}
+
+.about-header, .about-block {
+  color: #181D31;
+  padding: 2% 7% 2% 7%;
+}
+
+.about-hr-line {
+  width: 100%;
+  height: 2px;
+  border: 1px solid #D3AC2B;
+  border-radius: 5px;
+  background: #D3AC2B;
+}

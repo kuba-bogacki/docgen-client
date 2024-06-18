@@ -1,0 +1,52 @@
+.current-company-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 5% 5%;
+}
+
+.current-company-header {
+    margin: 5% 5% 0 5%;
+}
+
+.current-company-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 3% 0 0 0;
+}
+
+.current-company-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.current-company-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: floralwhite;
+    color: #181D31;
+    border: solid 2px #D3AC2B;
+    border-radius: 3px;
+    padding: 2% 2% 2% 2%;
+    margin: 2% 2% 2% 2%;
+    min-height: 10rem;
+    min-width: 25rem;
+    flex: 0 0 0;
+}
+
+.current-company-hr-line {
+    margin-top: 3%;
+    width: 100%;
+    height: 2px;
+    border: 1px solid #D3AC2B;
+    border-radius: 5px;
+    background: #D3AC2B;
+}

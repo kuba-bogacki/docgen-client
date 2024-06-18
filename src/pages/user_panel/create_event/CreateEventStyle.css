@@ -1,0 +1,28 @@
+.create-event-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 5% 5%;
+}
+
+.create-event-header {
+    margin: 5% 5% 0 5%;
+}
+
+.create-event-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    margin: 3% 0 0 0;
+}
+
+.create-event-hr-line {
+    margin-top: 3%;
+    width: 100%;
+    height: 2px;
+    border: 1px solid #D3AC2B;
+    border-radius: 5px;
+    background: #D3AC2B;
+}

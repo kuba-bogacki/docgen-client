@@ -1,0 +1,34 @@
+import Cookies from "universal-cookie";
+import jwt from "jwt-decode";
+
+const cookie = new Cookies();
+
+const setCookie = (jwtResponseToken) => {
+  const decoded = jwt(jwtResponseToken);
+  cookie.set("jwtAuthenticationToken", jwtResponseToken, {expires : new Date(decoded.exp * 10000)});
+};
+
+const getCookie = () => {
+  if (cookie.get("jwtAuthenticationToken") === undefined) {
+    return null;
+  } else {
+    return {'Authorization': 'Bearer ' + cookie.get("jwtAuthenticationToken")};
+  }
+};
+
+const removeCookie = () => {
+  cookie.remove("jwtAuthenticationToken");
+};
+
+const isLogIn = () => {
+  return cookie.get("jwtAuthenticationToken") !== undefined;
+};
+
+const CookieService = {
+  setCookie,
+  getCookie,
+  removeCookie,
+  isLogIn
+};
+
+export default CookieService;

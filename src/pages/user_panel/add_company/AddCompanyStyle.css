@@ -1,0 +1,50 @@
+.add-company-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 5% 5%;
+}
+
+.add-company-header {
+    margin: 5% 5% 5% 5%;
+}
+
+.add-company-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    padding: 0 5% 5% 5%;
+}
+
+.add-company-response {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    padding: 5% 0 0 0;
+    flex: 0 0 75%;
+}
+
+.add-company-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.add-company-sizing-style {
+    flex: 0 0 75%;
+}
+
+.add-company-hr-line {
+    margin-top: 3%;
+    width: 100%;
+    height: 2px;
+    border: 1px solid #D3AC2B;
+    border-radius: 5px;
+    background: #D3AC2B;
+}

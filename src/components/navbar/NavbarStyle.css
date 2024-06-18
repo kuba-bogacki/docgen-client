@@ -1,0 +1,138 @@
+.navbar-container {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 5.5rem;
+  background: #0E1D35;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transition: top 0.5s;
+}
+
+.navbar-container-item {
+  display: inline-block;
+  flex: 0 0 1;
+  font-size: 110%;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-menu-list,
+.navbar-user-list {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.navbar-menu-list {
+  justify-content: flex-start;
+  margin-left: 1rem;
+}
+
+.navbar-user-list {
+  justify-content: flex-end;
+  margin-right: 1rem;
+}
+
+ul.navbar-menu-list li,
+ul.navbar-user-list li {
+  display: inline-block;
+  list-style-type: none;
+  padding: 1rem;
+  float: bottom;
+}
+
+ul.navbar-menu-list li a,
+ul.navbar-user-list li a {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: snow;
+  transition: 0.3s ease;
+}
+
+ul.navbar-menu-list:hover li a,
+ul.navbar-user-list:hover li a {
+  color: snow;
+}
+
+ul.navbar-menu-list:hover li a:not(:hover),
+ul.navbar-user-list:hover li a:not(:hover) {
+  color: snow;
+  opacity: 0.3;
+  filter: blur(1px);
+}
+
+.company-logo {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.menu-icons {
+  display: none;
+}
+
+.fa-bars {
+  color: #fff;
+}
+
+.nav-links-mobile {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  background-color: #fafafa;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #222;
+}
+
+@media screen and (max-width: 1120px) {
+  .navbar-container {
+    z-index: 10000;
+  }
+
+  .navbar-menu-list,
+  .navbar-user-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: #0E1D35;
+    box-shadow: 0 5px 3px -3px dimgrey;
+    backdrop-filter: blur(114px);
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 0;
+    align-items: center;
+    padding: 80px 0 30px 0;
+    margin: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
+  }
+
+  .navbar-menu-list {
+    left: -130%;
+  }
+
+  .navbar-user-list {
+    right: -130%;
+  }
+
+  .navbar-menu-list.active,
+  .navbar-user-list.active {
+    left: 0;
+    right: 0;
+  }
+
+  .menu-icons {
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
