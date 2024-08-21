@@ -40,7 +40,7 @@ function JoinToCompany() {
               <span className="icon-input-inline">
                 <QuestionAnswerIcon fontSize="large"/>
                 <h3 className="join-to-company-sizing-style">{response.data.companyName}</h3>
-                <Button sx={style.loginButtonStyle} onClick={() => sendInvitationRequest(response.data.companyId)}>Send</Button>
+                <Button sx={style.loginButtonStyle} onClick={() => sendInvitationRequest(response.data)}>Send</Button>
               </span>
             </div>
           );
@@ -62,34 +62,28 @@ function JoinToCompany() {
       })
   };
 
-  const sendInvitationRequest = (companyId) => {
-    let data = {
-      companyId : companyId,
-      notificationMessage : NotificationContent.membershipRequestMessage,
-      notificationType : NotificationContent.membershipRequestType
-    };
+  const sendInvitationRequest = (company) => {
+    if (!company.companyMembers.includes(LocalStorageService.getCurrentUser())) {
+      let data = {
+        notificationCompanyId : company.companyId,
+        notificationMessage : NotificationContent.membershipRequestMessage,
+        notificationType : NotificationContent.membershipRequestType
+      };
 
-    stompClient.publish({
-      destination : "/app/broadcast",
-      body : JSON.stringify(data),
-      headers : CookieService.getCookie()
-    });
+      stompClient.publish({
+        destination : "/app/send-membership-petition",
+        body : JSON.stringify(data),
+        headers : CookieService.getCookie()
+      });
 
-    // NotificationService.sendMembershipPetition(data);
-    // console.log(rer);
-      // .then((response) => {
-      //   if (response.status === 200) {
-          setModalTitle(ModalContent.successfullyMembershipPetitionTitle);
-          setModalBody(ModalContent.successfullyMembershipPetitionBody);
-          displayModal(true);
-
-    // }
-      // })
-      // .catch(() => {
-      //   setModalTitle(ModalContent.failureMembershipPetitionTitle);
-      //   setModalBody(ModalContent.failureMembershipPetitionBody);
-      //   displayModal(true);
-      // })
+      setModalTitle(ModalContent.successfullyMembershipPetitionTitle);
+      setModalBody(ModalContent.successfullyMembershipPetitionBody);
+      displayModal(true);
+    } else {
+      setModalTitle(ModalContent.userAlreadyCompanyMemberTitle);
+      setModalBody(ModalContent.userAlreadyCompanyMemberBody);
+      displayModal(true);
+    }
   };
 
   const displayModal = (view) => {

@@ -40,8 +40,8 @@ function Members() {
       <main className="members-body">
         <h3>List of members in current company</h3>
         {companyMembers.map((member, index) =>
-          <div className="member-body-block">
-            <div key={index} className="members-card">
+          <div className="member-body-block" key={index}>
+            <div className="members-card">
               <h5>{member.userFirstNameI} {member.userFirstNameII}</h5>
               <h5>{member.userLastNameI} {member.userLastNameII}</h5>
               <h5>{member.userEmail}</h5>

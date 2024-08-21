@@ -3,29 +3,42 @@ import '../../../node_modules/animate.css/animate.css';
 import COMPANY_LOGO from "../../resources/images/navbar/transparent_logo.png";
 import style from "../../constans/overwriteMaterialUiStyle";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuIcon from '@mui/icons-material/Menu';
-import MarkunreadIcon from '@mui/icons-material/Markunread';
 import CloseIcon from '@mui/icons-material/Close';
 import {HashLink} from "react-router-hash-link";
-import {Badge, Button, IconButton, Menu, MenuItem} from "@mui/material";
+import {Button} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import SearchBar from "./search_bar/SearchBar";
 import {useDispatch, useSelector} from "react-redux";
 import CookieService from "../../services/cookieService";
-import AuthService from "../../services/authenticationService";
-import {StompSessionProvider, useStompClient} from "react-stomp-hooks";
 import Notification from "./notification/Notification";
-import SockJsClient from "react-stomp";
+import {useSubscription} from "react-stomp-hooks";
+import LocalStorageService from "../../services/localStorageService";
+import {useNavigate} from "react-router-dom";
+import RedirectService from "../../services/redirectionService";
 
 function Navbar() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const session = useSelector(state => state.sessionActive);
 
   useEffect(() => {
     updateSession();
+    if (session.sessionActive) {
+      const intervalId = setInterval(() => {
+        if (CookieService.getCookie() === null) {
+          LocalStorageService.logOut();
+          navigate("/");
+          RedirectService.reloadPage();
+        }
+      }, 3000);
+      return () => clearInterval(intervalId);
+    }
   }, [session.sessionActive]);
+
+  useSubscription("/user/queue/refresh-token", (refreshToken) => {
+    CookieService.setCookie(refreshToken.body);
+  });
 
   const [previousScrollPosition, setPreviousScrollPosition] = useState(window.scrollY);
   const [buttonClassName, setButtonClassName] = useState("fas fa-bars");
@@ -76,7 +89,8 @@ function Navbar() {
     setMenuListClassName("navbar-menu-list");
     if (sessionState === "signOut") {
       dispatch({type: sessionState});
-      AuthService.signOut();
+      CookieService.removeCookie();
+      LocalStorageService.logOut();
     }
   };
 
@@ -120,37 +134,7 @@ function Navbar() {
               <li><HashLink smooth to="/user-panel" onClick={() => closeMenuAndUserList("signIn")}>Company</HashLink></li>
               <li><HashLink smooth to="/user-profile" onClick={() => closeMenuAndUserList("signIn")}>Profile</HashLink></li>
               <li><HashLink smooth to="/" onClick={() => closeMenuAndUserList("signOut")}>Sign out</HashLink></li>
-              {/*<li><HashLink smooth to="/user-profile" onClick={() => closeMenuAndUserList("signIn")}>*/}
-              {/*  <AccountBoxIcon fontSize="large" sx={style.navbarUserIcon}/>*/}
-              {/*</HashLink></li>*/}
-              {/*<Button onClick={publishMessage}> Send message </Button>*/}
-              {/*<StompSessionProvider url={"http://localhost:8080/user-notification"}>*/}
-              {/*<SockJsClient*/}
-              {/*  url={SOCKET_URL}*/}
-              {/*  topics={['/topic/reply']}*/}
-              {/*  onConnect={onConnected}*/}
-              {/*  onDisconnect={console.log("Disconnected!")}*/}
-              {/*  onMessage={msg => onMessageReceived("Hello world")}*/}
-              {/*  debug={true}*/}
-              {/*>*/}
-
-              {/*</SockJsClient>*/}
-              {/*<div>{message}</div>*/}
               <Notification/>
-              {/*</StompSessionProvider>*/}
-              {/*<IconButton variant="contained" size="large" onClick={showNotifications} style={style.navbarButtonStyle}>*/}
-              {/*  <Badge badgeContent={3} color="primary"><MarkunreadIcon/></Badge>*/}
-              {/*</IconButton>*/}
-              {/*<Menu open={openNotification} onClose={closeNotification} anchorOrigin={style.notificationAnchor}*/}
-              {/*  marginThreshold={60} sx={style.notificationModal}>*/}
-              {/*  <MenuItem sx={style.notificationItem} dense={false}>*/}
-              {/*    <p><strong>John Paul</strong> with e-mail <strong>john@gmail.com</strong> want to join to <strong>Fca sp. z o.o.</strong></p>*/}
-              {/*    <div className="membership-confirmation-buttons">*/}
-              {/*      <Button sx={style.membershipButton} variant="outlined" size="small" onClick={() => confirmMembership()}>Confirm</Button>*/}
-              {/*      <Button sx={style.membershipButton} variant="outlined" size="small" onClick={() => rejectMembership()}>Reject</Button>*/}
-              {/*    </div>*/}
-              {/*  </MenuItem>*/}
-              {/*</Menu>*/}
             </>
             :
             <>

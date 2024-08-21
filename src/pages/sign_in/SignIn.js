@@ -11,14 +11,15 @@ import {Button, CircularProgress} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import CookieService from "../../services/cookieService";
+import {useStompClient, useSubscription} from "react-stomp-hooks";
 import LocalStorageService from "../../services/localStorageService";
-import UserService from "../../services/userService";
+import CookieService from "../../services/cookieService";
 
 function SignIn() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const stompClient = useStompClient();
   const [queryParameters] = useSearchParams();
 
   useEffect(() => {
@@ -61,29 +62,43 @@ function SignIn() {
     navigate(route);
   };
 
+  const getWebsocketUserPrincipal = () => {
+    stompClient.publish({
+      destination : "/app/get-principal-name",
+      headers : CookieService.getCookie()
+    });
+  };
+
   const loginToAccount = () => {
-    setProgressSendData(true);
-    let authenticationRequest = {userEmail, userPassword};
-    let authenticate;
-    if (queryParameters.get("verify-code") !== null) {
-      authenticate = AuthService.signInToActivateAccount(queryParameters.get("verify-code"), authenticationRequest);
-    } else if (queryParameters.get("join-to-company") !== null) {
-      authenticate = AuthService.signInToJoinToCompany(queryParameters.get("join-to-company"), authenticationRequest);
+    if (userEmail !== "" && userPassword !== "") {
+      setProgressSendData(true);
+      let authenticationRequest = {userEmail, userPassword};
+      let authenticate;
+      if (queryParameters.get("verify-code") !== null) {
+        authenticate = AuthService.signInToActivateAccount(queryParameters.get("verify-code"), authenticationRequest);
+      } else if (queryParameters.get("join-to-company") !== null) {
+        authenticate = AuthService.signInToJoinToCompany(queryParameters.get("join-to-company"), authenticationRequest);
+      } else {
+        authenticate = AuthService.signIn(authenticationRequest);
+      }
+      authenticate
+        .then(() => {
+          setProgressSendData(false);
+          getWebsocketUserPrincipal();
+          updateSession();
+          goToPage("/user-panel");
+        })
+        .catch((error) => {
+          setProgressSendData(false);
+          setModalTitle(ModalContent.signInWrongCredentialsTitle);
+          setModalBody(error.response.data);
+          displayModal(true);
+        })
     } else {
-      authenticate = AuthService.signIn(authenticationRequest);
+      setModalTitle(ModalContent.signInParamMissingTitle);
+      setModalBody(ModalContent.signInParamMissingBody);
+      displayModal(true);
     }
-    authenticate
-      .then(() => {
-        setProgressSendData(false);
-        updateSession();
-        goToPage("/user-panel");
-      })
-      .catch((error) => {
-        setProgressSendData(false);
-        setModalTitle(ModalContent.signInWrongCredentialsTitle);
-        setModalBody(error.response.data);
-        displayModal(true);
-      })
   };
 
   return (

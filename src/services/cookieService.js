@@ -5,7 +5,7 @@ const cookie = new Cookies();
 
 const setCookie = (jwtResponseToken) => {
   const decoded = jwt(jwtResponseToken);
-  cookie.set("jwtAuthenticationToken", jwtResponseToken, {expires : new Date(decoded.exp * 10000)});
+  cookie.set("jwtAuthenticationToken", jwtResponseToken, {expires : new Date(decoded.exp * 1000)});
 };
 
 const getCookie = () => {
@@ -13,6 +13,14 @@ const getCookie = () => {
     return null;
   } else {
     return {'Authorization': 'Bearer ' + cookie.get("jwtAuthenticationToken")};
+  }
+};
+
+const getCookieExpiration = () => {
+  if (cookie.get("jwtAuthenticationToken") === undefined) {
+    return null;
+  } else {
+    return new Date(jwt(cookie.get("jwtAuthenticationToken")).exp * 1000);
   }
 };
 
@@ -28,7 +36,8 @@ const CookieService = {
   setCookie,
   getCookie,
   removeCookie,
-  isLogIn
+  isLogIn,
+  getCookieExpiration
 };
 
 export default CookieService;

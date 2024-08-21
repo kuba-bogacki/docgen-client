@@ -130,16 +130,21 @@ function SignUp() {
       userPassword, userGender, termsAndCondition}
 
     AuthService.signUp(registerRequest)
-      .then(() => {
+      .then((response) => {
         setProgressSendData(false);
-        setModalTitle(ModalContent.signUpEmailVerificationTitle);
-        setModalBody(ModalContent.signUpEmailVerificationBody);
-        displayModal(true);
-      })
-      .catch((error) => {
-        setProgressSendData(false);
-        setModalTitle(ModalContent.signUpRegistrationFailedTitle);
-        setModalBody(ModalContent.signUpRegistrationFailedBody + error.response.data);
+        if (response.status === 201) {
+          setModalTitle(ModalContent.signUpEmailVerificationTitle);
+          setModalBody(ModalContent.signUpEmailVerificationBody);
+        } else if (response.status === 403) {
+          setModalTitle(ModalContent.signUpEmailExistTitle);
+          setModalBody(ModalContent.signUpEmailExistBody);
+          // let modalButtonContainer = document.getElementsByClassName("modal-actions-buttons-container")[0];
+          // let resendButton = document.createAttribute(<Button sx={style.signUpButtonStyle}>Resend</Button>);
+          // modalButtonContainer.appendChild(resendButton);
+        } else {
+          setModalTitle(ModalContent.signUpRegistrationFailedTitle);
+          setModalBody(ModalContent.signUpRegistrationFailedBody + response.data);
+        }
         displayModal(true);
       })
   };

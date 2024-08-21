@@ -10,7 +10,8 @@
 
 .my-companies-body {
     display: flex;
-    flex-direction: row;
+    /*flex-direction: row;*/
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: stretch;
@@ -30,7 +31,7 @@
     border-radius: 3px;
     margin: 2% 2% 2% 2%;
     padding: 2% 2% 2% 2%;
-    min-height: 15rem;
+    min-height: 8rem;
     min-width: 15rem;
     flex: 0 0 0;
     transition: 0.5s;

@@ -29,7 +29,7 @@ function Modal({modalTitle, modalBody, displayModal}) {
         <DialogContent sx={style.modalBodyStyle}>
           <DialogContentText id="alert-dialog-description">{loadedBody}</DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="modal-actions-buttons-container">
           <Button onClick={closeModal} sx={style.signUpButtonStyle}>Close</Button>
         </DialogActions>
       </Dialog>

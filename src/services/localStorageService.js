@@ -3,7 +3,8 @@ const loadCurrentCompany = (companyId) => {
 };
 
 const getCurrentCompany = () => {
-  return localStorage.getItem("currentCompany");
+  let currentCompanyId = localStorage.getItem("currentCompany");
+  return currentCompanyId.substring(1, currentCompanyId.length - 1)
 };
 
 const removeCurrentCompany = () => {
@@ -15,7 +16,8 @@ const loadCurrentUser = (userId) => {
 };
 
 const getCurrentUser = () => {
-  return localStorage.getItem("currentUser");
+  let currentUserId = localStorage.getItem("currentUser");
+  return currentUserId.substring(1, currentUserId.length - 1)
 };
 
 const removeCurrentUser = () => {
@@ -27,6 +29,8 @@ const logIn = (isLoggedIn) => {
 };
 
 const logOut = () => {
+  localStorage.removeItem("currentCompany");
+  localStorage.removeItem("currentUser");
   localStorage.removeItem("loggedIn");
 };
 

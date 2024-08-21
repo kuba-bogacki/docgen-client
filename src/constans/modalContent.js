@@ -7,10 +7,15 @@ const modalContent = {
   signUpEmailVerificationTitle : "Your account has been created",
   signUpEmailVerificationBody : "Everything works perfectly and your profile has been created. Now you have 24 hours " +
     "to open your email and click into generated link to activate your account.",
+  signUpEmailExistTitle : "User already exist",
+  signUpEmailExistBody : "You try to create account with already existing email address in our database. " +
+    "If you not activate account after previous registration, push below button to resend email with activation link.",
   signUpRegistrationFailedTitle : "Registration failed",
   signUpRegistrationFailedBody : "We couldn't create account. ",
   signUpSuccessfullyVerificationTitle : "Successfully verification",
   signUpSuccessfullyVerificationBody : "You already successfully verify account. Now you can finally login to your account.",
+  signInParamMissingTitle : "Some parameter are missing",
+  signInParamMissingBody : "If you want to sign in, you have to fill both require fields. Please do not miss necessary parameter.",
   signInWrongCredentialsTitle : "Ups... Something went wrong!",
   successSendResetEmailTitle : "Reset link send",
   successSendResetEmailBody : "Email with link to reset your password send successfully. Please check your email.",
@@ -43,7 +48,9 @@ const modalContent = {
   failureMembershipPetitionBody : "Sorry, we can't send your request right now. Please try again a few moments later.",
   successfullyMembershipPetitionTitle : "Membership petition sent!",
   successfullyMembershipPetitionBody : "Your request has been send. Now you have to wait until at least one of company " +
-    "member confirm your membership. Please be patient."
+    "member confirm your membership. Please be patient.",
+  userAlreadyCompanyMemberTitle : "Invalid membership request",
+  userAlreadyCompanyMemberBody : "You are already part of company. Impossible to send membership petition once again."
 }
 
 export default modalContent;

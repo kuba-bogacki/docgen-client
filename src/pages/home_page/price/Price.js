@@ -19,7 +19,6 @@ function Price() {
   );
 
   const rollUpDownAccordion = () => {
-    console.log(priceButtons);
     if (accordionVisibleClass === "accordion-arrow") {
       setAccordionVisible("accordion-arrow active");
       for (let i = 0; i < priceButtons.length; i++) {

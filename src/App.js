@@ -19,14 +19,13 @@ import SignUp from "./pages/sign_up/SignUp";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Faq from "./pages/faq/Faq";
-import CookieService from "./services/cookieService";
 import {StompSessionProvider} from "react-stomp-hooks";
 
 function App() {
 
   return (
     <div className="app-container">
-      <StompSessionProvider url="http://localhost:8080/v1.0/notification/websocket" connectHeaders={CookieService.getCookie()}>
+      <StompSessionProvider url="http://localhost:8080/v1.0/notification/websocket">
         <Router>
           <Navbar/>
             <Routes>

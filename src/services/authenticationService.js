@@ -39,17 +39,14 @@ const signIn = (authenticationRequest) => {
 const signUp = (registerRequest) => {
   return axios.post(BASE_URL + "/create", registerRequest)
     .then((response) => {
-      if (response.status === 200) {
-        return response;
-      }
+      return response;
     })
     .catch((error) => {
-      return error.response.data;
+      return error.response;
     })
 };
 
 const sendResetLink = (userData) => {
-  console.log(userData);
   return axios.post(BASE_URL + "/send-email-to-reset-password", userData)
     .then((response) => {
       if (response.status === 200) {
@@ -73,18 +70,13 @@ const resetPassword = (verificationCode, authenticationRequest) => {
     })
 };
 
-const signOut = () => {
-  CookieService.removeCookie();
-};
-
 const AuthService = {
   signInToJoinToCompany,
   signInToActivateAccount,
   sendResetLink,
   resetPassword,
   signUp,
-  signIn,
-  signOut
+  signIn
 };
 
 export default AuthService;
