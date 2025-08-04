@@ -126,8 +126,9 @@ function SignUp() {
   };
 
   const registerUser = () => {
+    let upperCaseUserGender = userGender.toUpperCase();
     let registerRequest = {userFirstNameI, userFirstNameII, userLastNameI, userLastNameII, userEmail,
-      userPassword, userGender, termsAndCondition}
+      userPassword, upperCaseUserGender, termsAndCondition}
 
     AuthService.signUp(registerRequest)
       .then((response) => {

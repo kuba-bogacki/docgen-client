@@ -10,34 +10,120 @@
 
 .company-files-body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: stretch;
     align-content: stretch;
     margin: 3% 0 0 0;
+    /*background-color: #D3AC2B;*/
 }
 
-.company-files-card {
+.company-files-navigation-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+
+    /*margin: 3% 0 0 0;*/
+    /*background-color: chocolate;*/
+}
+
+.company-files-icon-picked {
+    color: #D3AC2B;
+}
+
+.company-files-generator-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    border: solid 3px #D3AC2B;
+    border-radius: 3px;
+    min-height: 20rem;
+    min-width: 100%;
+    margin: 3% 0 0 0;
+    padding: 2% 2% 2% 2%;
+    background-color: transparent;
+}
+
+.company-files-generator-card {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    /*align-items: center;*/
     background-color: floralwhite;
     color: #181D31;
     border: solid 2px #D3AC2B;
     border-radius: 3px;
     margin: 3% 3% 3% 3%;
     padding: 2% 2% 2% 2%;
-    min-height: 15rem;
-    min-width: 15rem;
-    flex: 0 0 0;
+    min-height: 10rem;
+    min-width: 10rem;
+    max-width: 15rem;
+    /*flex: 0 0 0;*/
+    /*transition: 0.5s;*/
+}
+
+.custom-nav {
+    background-color: black;
+}
+
+.company-files-documents-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /*align-items: center;*/
+    background-color: floralwhite;
+    color: #181D31;
+    border: solid 2px #D3AC2B;
+    border-radius: 3px;
+    /*margin: 1% 2% 1% 1%;*/
+    padding: 2% 2% 2% 2%;
+    /*min-height: 10rem;*/
+    min-width: 100%;
+    /*flex: 0 0 0;*/
+    /*transition: 0.5s;*/
+}
+
+.company-files-list-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 2% 0 2%;
+    border: solid 2px #D3AC2B;
+    color: #181D31;
+}
+
+.company-files-list-element-icon-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1% 0 1% 0;
+    min-width: 15%;
+    /*background-color: #144272;*/
+}
+
+.company-files-icon-container:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    filter: blur(2px);
+}
+
+.company-files-generator-card:hover {
+    cursor: pointer;
+    transform: translateY(-0.5rem);
     transition: 0.5s;
 }
 
-.company-files-card:hover {
+.list-element-icon-box:hover {
     cursor: pointer;
-    transform: translateY(-1rem);
+    transform: translateY(-0.5rem);
     transition: 0.5s;
 }
 
