@@ -94,7 +94,7 @@ const style = {
     textAlign : "center",
     color : "#777777"
   },
-  eventModalDateTimeStyle : {
+  customModalBoxStyle : {
     display : "flex",
     flexDirection : "row",
     alignItems : "stretch",
@@ -127,7 +127,7 @@ const style = {
     },
     margin : "3%",
   },
-  newEventTextFieldStyle : {
+  customTextFieldStyle : {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: "#D3AC2B",
@@ -246,6 +246,14 @@ const style = {
     '& .MuiPickersDay-root': {
       borderRadius: "15%",
     }
+  },
+  documentDetailBoxStyle : {
+    display : "flex",
+    flexDirection : "row",
+    alignItems : "stretch",
+    alignContent : "stretch",
+    margin : "5%",
+    width : "120rem"
   }
 }
 

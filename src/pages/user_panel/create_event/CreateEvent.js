@@ -302,14 +302,14 @@ function CreateEvent() {
             <DialogTitle id="alert-dialog-title" sx={style.modalTitleStyle}>Create new event</DialogTitle>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DialogContent>
-                <Box sx={style.eventModalDateTimeStyle}>
-                  <TextField required id="outlined-required" label="Title" sx={style.newEventTextFieldStyle} value={eventTitle} onChange={(e) => setEventTitle(e.target.value)}/>
+                <Box sx={style.customModalBoxStyle}>
+                  <TextField required id="outlined-required" label="Title" sx={style.customTextFieldStyle} value={eventTitle} onChange={(e) => setEventTitle(e.target.value)}/>
                 </Box>
-                <Box sx={style.eventModalDateTimeStyle}>
+                <Box sx={style.customModalBoxStyle}>
                   <DateField label="Date" defaultValue={dayjs(modalDateFormatter())} format="DD-MM-YYYY" readOnly sx={style.newEventFieldsStyle} onChange={handleDateChange}/>
                   <TimeField label="Time" defaultValue={dayjs(`${modalDateFormatter()}T${selectedTime}`)} format="HH:mm" sx={style.newEventFieldsStyle} onChange={handleTimeChange}/>
                 </Box>
-                <Box sx={style.eventModalDateTimeStyle}>
+                <Box sx={style.customModalBoxStyle}>
                   <FormControl sx={style.newEventFieldsStyle}>
                     <FormLabel id="demo-row-radio-buttons-group-label-event-type" sx={style.newEventFieldsStyle}>Type</FormLabel>
                     <RadioGroup column="true" aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={eventType} onChange={(e) => setEventType(e.target.value)}>
@@ -328,7 +328,6 @@ function CreateEvent() {
           </Dialog>
         </div>
       }
-      {/*{openModal && <Modal modalTitle={modalTitle} modalBody={modalBody} displayModal={displayModal}/>}*/}
     </div>
   );
 }

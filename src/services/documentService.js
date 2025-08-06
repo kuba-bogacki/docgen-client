@@ -54,7 +54,7 @@ const deleteCompanyDocument = (documentId) => {
 };
 
 const DocumentService = {
-  createNewCompanyDocument: createNewFinancialStatement,
+  createNewFinancialStatement,
   getAllCompanyDocuments,
   getDetailedCompanyDocument,
   deleteCompanyDocument

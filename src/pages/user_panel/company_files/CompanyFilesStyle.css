@@ -109,6 +109,11 @@
     /*background-color: #144272;*/
 }
 
+.company-files-modal-container {
+    /*display: flex;*/
+    /*width: 19rem;*/
+}
+
 .company-files-icon-container:hover {
     cursor: pointer;
     transition: 0.5s;
