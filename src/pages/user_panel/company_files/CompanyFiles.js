@@ -5,14 +5,13 @@ import CreateIcon from '@mui/icons-material/Create';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import React, {useEffect, useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import LocalStorageService from "../../../services/localStorageService";
 import DocumentService from "../../../services/documentService";
 import style from "../../../constans/overwriteMaterialUiStyle";
 import {addDays, format, parse} from "date-fns";
-import {DateField, TimeField} from "@mui/x-date-pickers";
+import {DateField} from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
@@ -21,8 +20,7 @@ function CompanyFiles() {
 
   const [documentDetailsModalOpen, setDocumentDetailsModalOpen] = useState(false);
   const [financialStatementModalOpen, setFinancialStatementModalOpen] = useState(false);
-  const [isCreateIcon, setIsCreateIcon] = useState(true);
-  const [boxContent, setBoxContent] = useState(<></>);
+  const [isCreateMode, setIsCreateMode] = useState(true);
   const [documentsArray, setDocumentsArray] = useState([]);
   const [documentPdfDetail, setDocumentPdfDetail] = useState("");
   const [periodStartDate, setPeriodStartDate] = useState(null);
@@ -35,15 +33,8 @@ function CompanyFiles() {
   const [supervisoryBoardChairman, setSupervisoryBoardChairman] = useState("");
   const [supervisoryBoardMembers, setSupervisoryBoardMembers] = useState([""]);
 
-  const [numPages, setNumPages] = useState(null);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
   useEffect(() => {
     loadDefaultDate();
-    loadDefaultBox();
     getCompanyDocuments();
   }, []);
 
@@ -51,22 +42,10 @@ function CompanyFiles() {
     const formattedDateString = format(new Date(), "dd-MM-yyyy");
     setPeriodStartDate(formattedDateString);
     setPeriodEndDate(formattedDateString);
-  }
-
-  const loadDefaultBox = () => {
-    setBoxContent(
-      <>
-        <div className="company-files-generator-card" onClick={() => openFinancialStatementModal()}>
-          <h3>Financial statement</h3>
-        </div>
-        <div className="company-files-generator-card">
-          <h3>Other document</h3>
-        </div>
-      </>
-    )
-  }
+  };
 
   const closeDocumentDetailsModal = () => {
+    URL.revokeObjectURL(documentPdfDetail);
     setDocumentDetailsModalOpen(false);
   };
 
@@ -146,16 +125,6 @@ function CompanyFiles() {
     return URL.createObjectURL(blob);
   };
 
-  const getCompanyDocuments = () => {
-    DocumentService.getAllCompanyDocuments()
-      .then((response) => {
-        setDocumentsArray(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
   const showDocumentsDetails = (documentId) => {
     DocumentService.getDetailedCompanyDocument(documentId)
       .then((response) => {
@@ -169,7 +138,17 @@ function CompanyFiles() {
       .catch((error) => {
         console.log(error);
       })
-  }
+  };
+
+  const getCompanyDocuments = () => {
+    DocumentService.getAllCompanyDocuments()
+        .then((response) => {
+          setDocumentsArray(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+  };
 
   const editDocumentName = (documentId) => {
     // DocumentService.editEvidenceName(documentId)
@@ -179,17 +158,19 @@ function CompanyFiles() {
     //   .catch((error) => {
     //     console.log(error);
     //   })
-  }
+  };
 
   const deleteDocument = (documentId) => {
     DocumentService.deleteCompanyDocument(documentId)
       .then((response) => {
-        return response;
+        if (response.status === 200) {
+          setDocumentsArray(previousDocuments => previousDocuments.filter(evidence => evidence.evidenceId !== documentId));
+        }
       })
       .catch((error) => {
         console.log(error);
       })
-  }
+  };
 
   const createNewFinancialStatement = () => {
     let documentData = {
@@ -203,11 +184,13 @@ function CompanyFiles() {
       managementBoardPresident : managementBoardPresident,
       supervisoryBoardChairman : supervisoryBoardChairman,
       supervisoryBoardMembers : supervisoryBoardMembers
-    }
+    };
 
     DocumentService.createNewFinancialStatement(documentData)
       .then((response) => {
-        return response;
+        if (response.status === 201) {
+          getCompanyDocuments();
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -215,41 +198,6 @@ function CompanyFiles() {
 
     eraseStates();
     setFinancialStatementModalOpen(false);
-  }
-
-  const focusOnBox = (createNewDocument) => {
-    if (createNewDocument === true) {
-      setBoxContent(
-        <>
-          <div className="company-files-generator-card" onClick={() => openFinancialStatementModal()}>
-            <h3>Financial statement</h3>
-          </div>
-          <div className="company-files-generator-card">
-            <h3>Other document</h3>
-          </div>
-        </>
-      );
-      setIsCreateIcon(true);
-    } else {
-      setBoxContent(
-        <>
-          <div className="company-files-documents-list">
-            <h3>List Documents</h3>
-            {documentsArray.map((document, index) =>
-              <div className="company-files-list-box" key={index}>
-                <h4>{index + 1}. {document.evidenceName}</h4>
-                <div className="company-files-list-element-icon-box">
-                  <VisibilityIcon className="list-element-icon-box" fontSize="medium" onClick={() => showDocumentsDetails(document.evidenceId)}/>
-                  <SaveAsIcon className="list-element-icon-box" fontSize="medium" onClick={() => editDocumentName(document.evidenceId)}/>
-                  <DeleteForeverIcon className="list-element-icon-box" fontSize="medium" onClick={() => deleteDocument(document.evidenceId)}/>
-                </div>
-              </div>
-            )}
-          </div>
-        </>
-      );
-      setIsCreateIcon(false);
-    }
   };
 
   return (
@@ -260,13 +208,36 @@ function CompanyFiles() {
       <hr className="company-files-hr-line animate__animated animate__fadeInLeftBig"></hr>
       <main className="company-files-body">
         <div className="company-files-navigation-box">
-          <CreateIcon fontSize="large" className={`company-files-icon-container ${isCreateIcon ? "company-files-icon-picked" : ""}`}
-            onClick={() => focusOnBox(true)}/>
-          <SearchIcon fontSize="large" className={`company-files-icon-container ${isCreateIcon ? "" : "company-files-icon-picked"}`}
-            onClick={() => focusOnBox(false)}/>
+          <CreateIcon fontSize="large" className={`company-files-icon-container ${isCreateMode ? "company-files-icon-picked" : ""}`}
+            onClick={() => setIsCreateMode(true)}/>
+          <SearchIcon fontSize="large" className={`company-files-icon-container ${isCreateMode ? "" : "company-files-icon-picked"}`}
+            onClick={() => setIsCreateMode(false)}/>
         </div>
         <div className="company-files-generator-box">
-          {boxContent}
+          {isCreateMode ? (
+            <>
+              <div className="company-files-generator-card" onClick={() => openFinancialStatementModal()}>
+                <h3>Financial statement</h3>
+              </div>
+              <div className="company-files-generator-card">
+                <h3>Other document</h3>
+              </div>
+            </>
+          ) : (
+            <div className="company-files-documents-list">
+              <h3>List Documents</h3>
+              {documentsArray.map((document, index) =>
+                <div className="company-files-list-box" key={index}>
+                  <h4>{index + 1}. {document.evidenceName}</h4>
+                  <div className="company-files-list-element-icon-box">
+                    <VisibilityIcon className="list-element-icon-box" fontSize="medium" onClick={() => showDocumentsDetails(document.evidenceId)}/>
+                    <SaveAsIcon className="list-element-icon-box" fontSize="medium" onClick={() => editDocumentName(document.evidenceId)}/>
+                    <DeleteForeverIcon className="list-element-icon-box" fontSize="medium" onClick={() => deleteDocument(document.evidenceId)}/>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </main>
       <hr className="company-files-hr-line animate__animated animate__fadeInLeftBig"></hr>
@@ -319,12 +290,10 @@ function CompanyFiles() {
       }
       {documentDetailsModalOpen &&
         <div className="company-files-modal-container">
-          <Dialog open={documentDetailsModalOpen} onClose={closeDocumentDetailsModal}>
+          <Dialog open={documentDetailsModalOpen} onClose={closeDocumentDetailsModal} PaperProps={{sx: style.modalDialogStyle}}>
             <DialogTitle sx={style.modalTitleStyle}>Document details</DialogTitle>
             <DialogContent>
-              {/*<Box sx={style.documentDetailBoxStyle}>*/}
-                <iframe src={documentPdfDetail} width="1300rem" height="700rem" title="PDF Viewer"/>
-              {/*</Box>*/}
+              <iframe className="company-files-pdf-box" src={documentPdfDetail} title="PDF Viewer"/>
             </DialogContent>
           </Dialog>
         </div>

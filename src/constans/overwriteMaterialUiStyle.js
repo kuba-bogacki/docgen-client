@@ -94,6 +94,12 @@ const style = {
     textAlign : "center",
     color : "#777777"
   },
+  modalDialogStyle : {
+    width: "60%",
+    minWidth: "60%",
+    height: "90%",
+    minHeight: "90%"
+  },
   customModalBoxStyle : {
     display : "flex",
     flexDirection : "row",
