@@ -306,12 +306,12 @@ function CreateEvent() {
                   <TextField required id="outlined-required" label="Title" sx={style.customTextFieldStyle} value={eventTitle} onChange={(e) => setEventTitle(e.target.value)}/>
                 </Box>
                 <Box sx={style.customModalBoxStyle}>
-                  <DateField label="Date" defaultValue={dayjs(modalDateFormatter())} format="DD-MM-YYYY" readOnly sx={style.newEventFieldsStyle} onChange={handleDateChange}/>
-                  <TimeField label="Time" defaultValue={dayjs(`${modalDateFormatter()}T${selectedTime}`)} format="HH:mm" sx={style.newEventFieldsStyle} onChange={handleTimeChange}/>
+                  <DateField label="Date" defaultValue={dayjs(modalDateFormatter())} format="DD-MM-YYYY" readOnly sx={style.customEventFieldsStyle} onChange={handleDateChange}/>
+                  <TimeField label="Time" defaultValue={dayjs(`${modalDateFormatter()}T${selectedTime}`)} format="HH:mm" sx={style.customEventFieldsStyle} onChange={handleTimeChange}/>
                 </Box>
                 <Box sx={style.customModalBoxStyle}>
-                  <FormControl sx={style.newEventFieldsStyle}>
-                    <FormLabel id="demo-row-radio-buttons-group-label-event-type" sx={style.newEventFieldsStyle}>Type</FormLabel>
+                  <FormControl sx={style.customEventFieldsStyle}>
+                    <FormLabel id="demo-row-radio-buttons-group-label-event-type" sx={style.customEventFieldsStyle}>Type</FormLabel>
                     <RadioGroup column="true" aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" value={eventType} onChange={(e) => setEventType(e.target.value)}>
                       <FormControlLabel value="voting" control={<Radio sx={style.radioControlFieldsStyle}/>} label="Voting"/>
                       <FormControlLabel value="weekly" control={<Radio sx={style.radioControlFieldsStyle}/>} label="Weekly"/>

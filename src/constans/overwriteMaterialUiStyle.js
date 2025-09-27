@@ -103,9 +103,21 @@ const style = {
   customModalBoxStyle : {
     display : "flex",
     flexDirection : "row",
+    alignItems : "center",
+    alignContent : "stretch",
+    justifyContent : "space-between",
+    margin : "5%"
+  },
+  addExtraBoxStyle : {
+    display : "flex",
+    justifyContent : "center",
+  },
+  boardMemberBoxStyle : {
+    display : "flex",
+    flexDirection : "row",
     alignItems : "stretch",
     alignContent : "stretch",
-    margin : "5%",
+    margin : "15%",
   },
   radioControlFieldsStyle : {
     color: "#D3AC2B",
@@ -113,7 +125,7 @@ const style = {
       color: "#a69044",
     },
   },
-  newEventFieldsStyle : {
+  customEventFieldsStyle : {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: "#D3AC2B"
@@ -130,6 +142,29 @@ const style = {
       '&.Mui-focused': {
         color: "#a69044"
       },
+    },
+    margin : "3%",
+  },
+  customBoardMemberFieldsStyle : {
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: "#D3AC2B"
+      },
+      '&:hover fieldset': {
+        borderColor: "#a69044",
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: "#D3AC2B",
+      },
+    },
+    '& .MuiFormLabel-root': {
+      color : "#D3AC2B",
+      '&.Mui-focused': {
+        color: "#a69044"
+      },
+    },
+    '& .MuiInputBase-root': {
+      width: '150%',
     },
     margin : "3%",
   },

@@ -5,6 +5,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import React, {useEffect, useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import LocalStorageService from "../../../services/localStorageService";
@@ -106,9 +107,7 @@ function CompanyFiles() {
   };
 
   const deleteLastSupervisoryBoardMember = () => {
-    if (supervisoryBoardMembers.length > 1) {
-      setSupervisoryBoardMembers(supervisoryBoardMembers.slice(0, -1));
-    }
+    setSupervisoryBoardMembers(supervisoryBoardMembers.slice(0, -1));
   };
 
   const convertBinaryString = (pdfContent) => {
@@ -248,8 +247,8 @@ function CompanyFiles() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DialogContent>
                 <Box sx={style.customModalBoxStyle}>
-                  <DateField label="Start Date" defaultValue={dayjs(modalDateFormatter(periodStartDate))} format="DD-MM-YYYY" sx={style.newEventFieldsStyle} onChange={handlePeriodStartDateChange}/>
-                  <DateField label="End Date" defaultValue={dayjs(modalDateFormatter(periodEndDate))} format="DD-MM-YYYY" sx={style.newEventFieldsStyle} onChange={handlePeriodEndDateChange}/>
+                  <DateField label="Start Date" defaultValue={dayjs(modalDateFormatter(periodStartDate))} format="DD-MM-YYYY" sx={style.customEventFieldsStyle} onChange={handlePeriodStartDateChange}/>
+                  <DateField label="End Date" defaultValue={dayjs(modalDateFormatter(periodEndDate))} format="DD-MM-YYYY" sx={style.customEventFieldsStyle} onChange={handlePeriodEndDateChange}/>
                 </Box>
                 <Box sx={style.customModalBoxStyle}>
                   <TextField required label="Company Equity" sx={style.customTextFieldStyle} value={formatToMoney(companyEquity)} onChange={(e) => setCompanyEquity(e.target.value.replace(/\D/g, ""))}/>
@@ -272,14 +271,14 @@ function CompanyFiles() {
                 <>
                   {supervisoryBoardMembers.map((member, index) => (
                     <Box key={index} sx={style.customModalBoxStyle}>
-                      <TextField label={`Supervisory Board Member ${index + 1}`} sx={style.customTextFieldStyle} value={member} onChange={(e) => handleMemberChange(index, e.target.value)}/>
+                      <TextField label={`Supervisory Board Member ${index + 1}`} sx={style.customBoardMemberFieldsStyle} value={member} onChange={(e) => handleMemberChange(index, e.target.value)}/>
+                      <DeleteForeverIcon className="list-element-icon-box" fontSize="large" sx={{color : "#a69044"}} onClick={() => deleteLastSupervisoryBoardMember()}/>
                     </Box>
                   ))}
-                  {/*<Box sx={style.customModalBoxStyle}>*/}
-                  {/*  <AddCircleOutlineIcon className="list-element-icon-box" fontSize="medium" onClick={() => createNewSupervisoryBoardMember()}/>*/}
-                  {/*  <DeleteForeverIcon className="list-element-icon-box" fontSize="medium" style={{cursor: supervisoryBoardMembers.length > 1 ? "pointer" : "not-allowed", opacity: supervisoryBoardMembers.length > 1 ? 1 : 0.5}} onClick={() => deleteLastSupervisoryBoardMember()}/>*/}
-                  {/*</Box>*/}
                 </>
+                <Box sx={style.addExtraBoxStyle}>
+                  <AddCircleIcon className="list-element-icon-box" fontSize="large" sx={{color : "#a69044"}} onClick={() => createNewSupervisoryBoardMember()}/>
+                </Box>
               </DialogContent>
               <DialogActions className="modal-actions-buttons-container">
                 <Button sx={style.loginButtonStyle} onClick={() => createNewFinancialStatement()}>Create</Button>

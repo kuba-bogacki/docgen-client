@@ -11,7 +11,7 @@ const customCompanyData = (rawCompanyName) => {
 };
 
 const companyName = (rawCompanyName) => {
-  return customCompanyData(rawCompanyName).replace(/Spółka Z Ograniczoną Odpowiedzialnością/g, "Sp.z.o.o");
+  return customCompanyData(rawCompanyName).replace(/Spółka Z Ograniczoną Odpowiedzialnością/g, "Sp. z o.o");
 };
 
 const parseShareCapital = (number) => {
