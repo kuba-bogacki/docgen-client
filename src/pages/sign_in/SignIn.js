@@ -82,18 +82,19 @@ function SignIn() {
         authenticate = AuthService.signIn(authenticationRequest);
       }
       authenticate
-        .then(() => {
-          setProgressSendData(false);
-          getWebsocketUserPrincipal();
-          updateSession();
-          goToPage("/user-panel");
-        })
-        .catch((error) => {
-          setProgressSendData(false);
-          setModalTitle(ModalContent.signInWrongCredentialsTitle);
-          setModalBody(error.response.data);
-          displayModal(true);
-        })
+        .then((response) => {
+            if (response.status === 401) {
+            setProgressSendData(false);
+            setModalTitle(ModalContent.signInWrongCredentialsTitle);
+            setModalBody(response.data);
+            displayModal(true);
+          } else {
+            setProgressSendData(false);
+            getWebsocketUserPrincipal();
+            updateSession();
+            goToPage("/user-panel");
+          }
+        });
     } else {
       setModalTitle(ModalContent.signInParamMissingTitle);
       setModalBody(ModalContent.signInParamMissingBody);

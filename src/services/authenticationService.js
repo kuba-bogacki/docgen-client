@@ -32,7 +32,7 @@ const signIn = (authenticationRequest) => {
       return response;
     })
     .catch((error) => {
-      return error.response.data;
+      return error.response;
     })
 };
 
