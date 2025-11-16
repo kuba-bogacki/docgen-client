@@ -50,7 +50,9 @@ const modalContent = {
   successfullyMembershipPetitionBody : "Your request has been send. Now you have to wait until at least one of company " +
     "member confirm your membership. Please be patient.",
   userAlreadyCompanyMemberTitle : "Invalid membership request",
-  userAlreadyCompanyMemberBody : "You are already part of company. Impossible to send membership petition once again."
+  userAlreadyCompanyMemberBody : "You are already part of company. Impossible to send membership petition once again.",
+  userNotLoggedInTitle : "User not logged in",
+  userNotLoggedInBody : "If you would like to sign up for a membership, please log in to your account first."
 }
 
 export default modalContent;
