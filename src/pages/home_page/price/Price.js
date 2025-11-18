@@ -6,7 +6,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import Modal from "../../../components/modal/Modal";
-import GlobalEnums from "../../../constans/globalEnums";
+import GlobalEnums, {MonthlyPrice} from "../../../constans/globalEnums";
 import ModalContent from "../../../constans/modalContent";
 import LocalStorageService from "../../../services/localStorageService";
 import Payment from "../../../components/payment/Payment";
@@ -22,6 +22,7 @@ function Price() {
   const [modalTitle, setModalTitle] = useState("");
   const [modalBody, setModalBody] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const [membership, setMembership] = useState("");
   const [monthlyPrice, setMonthlyPrice] = useState(0);
   const [openPayment, setOpenPayment] = useState(false);
   const priceButtons = document.getElementsByClassName("price-button");
@@ -73,17 +74,18 @@ function Price() {
 
   const runPayment = (membershipPackage) => {
     if (CookieService.isLogIn()) {
+      setMembership(membershipPackage);
       switch (membershipPackage) {
         case GlobalEnums.MembershipPackage.Silver : {
-          setMonthlyPrice(GlobalEnums.MembershipPackage.Silver);
+          setMonthlyPrice(GlobalEnums.MonthlyPrice.Silver);
           break;
         }
         case GlobalEnums.MembershipPackage.Diamond : {
-          setMonthlyPrice(GlobalEnums.MembershipPackage.Silver);
+          setMonthlyPrice(GlobalEnums.MonthlyPrice.Diamond);
           break;
         }
         case GlobalEnums.MembershipPackage.Gold : {
-          setMonthlyPrice(GlobalEnums.MembershipPackage.Silver);
+          setMonthlyPrice(GlobalEnums.MonthlyPrice.Gold);
           break;
         }
       }
@@ -139,7 +141,7 @@ function Price() {
         </label>
       </div>
       {openModal && <Modal modalTitle={modalTitle} modalBody={modalBody} displayModal={displayModal}/>}
-      {openPayment && <Payment packagePrice={monthlyPrice} stripePromise={loadStripe(StripeService.publicKey)} displayPayment={displayPayment}/>}
+      {openPayment && <Payment packagePrice={monthlyPrice} membership={membership} stripePromise={loadStripe(StripeService.publicKey)} displayPayment={displayPayment}/>}
     </div>
   );
 }
