@@ -1,26 +1,27 @@
-import {PaymentElement} from "@stripe/react-stripe-js";
-import {useEffect, useState} from "react";
-import {Dialog} from "@mui/material";
 import {Elements} from "@stripe/react-stripe-js";
+import {useEffect, useRef, useState} from "react";
+import {Dialog} from "@mui/material";
 import StripeService from "../../services/stripeService";
 import GlobalEnums from "../../constans/globalEnums";
+import {loadStripe} from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
-function Payment({packagePrice, membership, stripePromise, displayPayment}) {
+function Payment({packagePrice, membership, displayPayment}) {
+
+  const effectCalled = useRef(false);
+  const stripePromise = loadStripe(StripeService.publicKey);
 
   const [paymentOpen, setPaymentOpen] = useState(true);
+  const [paymentIntentId, setPaymentIntentId] = useState("");
   const [stripeClientSecret, setStripeClientSecret] = useState("");
 
   useEffect(() => {
+    if (effectCalled.current) return;
+    effectCalled.current = true;
     fetchStripeClientSecret();
   }, []);
 
-  const closePayment = () => {
-    displayPayment(false);
-    setPaymentOpen(false)
-  };
-
   const fetchStripeClientSecret = () => {
-    console.log("fetchStripeClientSecret");
     let paymentData = {
       membership : membership,
       packagePrice : packagePrice,
@@ -29,7 +30,20 @@ function Payment({packagePrice, membership, stripePromise, displayPayment}) {
     StripeService.createStripePaymentSession(paymentData)
       .then(response => {
         if (response.status === 201) {
-          setStripeClientSecret(response.data.clientSecret);
+          setPaymentIntentId(response.data.paymentIntentId);
+          setStripeClientSecret(response.data.paymentClientSecret);
+        } else {
+          console.log("Error" + response.data);
+        }
+      });
+  };
+
+  const cancelPayment = () => {
+    StripeService.cancelStripePaymentSession(paymentIntentId)
+      .then(response => {
+        if (response.status === 202) {
+          displayPayment(false);
+          setPaymentOpen(false)
         } else {
           console.log("Error" + response.data);
         }
@@ -40,20 +54,17 @@ function Payment({packagePrice, membership, stripePromise, displayPayment}) {
     clientSecret: stripeClientSecret,
     appearance: {
       theme: "stripe",
-    },
-    loader: "auto",
+    }
   };
 
   return (
     <div className="payment-container">
-      <Dialog open={paymentOpen} onClose={closePayment}>
+      <Dialog open={paymentOpen} onClose={cancelPayment}>
+        {stripeClientSecret &&
         <Elements options={options} stripe={stripePromise}>
-          <form>
-            <PaymentElement/>
-            <button>Submit</button>
-            <h1>Submit</h1>
-          </form>
+          <CheckoutForm membership={membership} displayPayment={displayPayment}/>
         </Elements>
+        }
       </Dialog>
     </div>
   );

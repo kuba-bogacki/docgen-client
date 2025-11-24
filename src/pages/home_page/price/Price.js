@@ -141,7 +141,7 @@ function Price() {
         </label>
       </div>
       {openModal && <Modal modalTitle={modalTitle} modalBody={modalBody} displayModal={displayModal}/>}
-      {openPayment && <Payment packagePrice={monthlyPrice} membership={membership} stripePromise={loadStripe(StripeService.publicKey)} displayPayment={displayPayment}/>}
+      {openPayment && <Payment packagePrice={monthlyPrice} membership={membership} displayPayment={displayPayment}/>}
     </div>
   );
 }
