@@ -1,5 +1,8 @@
+import "./CheckoutFormStyle.css";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import StripeService from "../../services/stripeService";
+import style from "../../constans/overwriteMaterialUiStyle";
+import {Button} from "@mui/material";
 
 function CheckoutForm({membership, displayPayment}) {
 
@@ -31,9 +34,9 @@ function CheckoutForm({membership, displayPayment}) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="checkout-form-container">
       <PaymentElement/>
-      <button>Submit</button>
+      <Button variant="outlined" size="large" sx={style.signUpButtonStyle} type="submit">Subscribe</Button>
     </form>
   );
 }

@@ -40,7 +40,7 @@ function Footer() {
       </div>
       <hr className="footer-hr-line"></hr>
       <div className="footer-rights">
-        <p>© 2023 Kosicki & Bogacki. All rights reserved</p>
+        <p>© 2025 Bogacki. All rights reserved</p>
       </div>
     </footer>
   );

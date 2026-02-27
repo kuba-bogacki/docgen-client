@@ -5,6 +5,7 @@ import StripeService from "../../services/stripeService";
 import GlobalEnums from "../../constans/globalEnums";
 import {loadStripe} from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import style from "../../constans/overwriteStripeStyle";
 
 function Payment({packagePrice, membership, displayPayment}) {
 
@@ -52,9 +53,7 @@ function Payment({packagePrice, membership, displayPayment}) {
 
   const options = {
     clientSecret: stripeClientSecret,
-    appearance: {
-      theme: "stripe",
-    }
+    appearance: style.stripeElementContainer
   };
 
   return (

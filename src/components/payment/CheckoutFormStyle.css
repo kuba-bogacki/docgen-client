@@ -1,0 +1,7 @@
+.checkout-form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+    gap: 13px;
+    padding-bottom: 4%;
+}

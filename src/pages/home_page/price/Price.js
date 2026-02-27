@@ -6,13 +6,10 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import Modal from "../../../components/modal/Modal";
-import GlobalEnums, {MonthlyPrice} from "../../../constans/globalEnums";
+import GlobalEnums from "../../../constans/globalEnums";
 import ModalContent from "../../../constans/modalContent";
-import LocalStorageService from "../../../services/localStorageService";
 import Payment from "../../../components/payment/Payment";
 import CookieService from "../../../services/cookieService";
-import StripeService from "../../../services/stripeService";
-import {loadStripe} from "@stripe/stripe-js";
 
 function Price() {
 
