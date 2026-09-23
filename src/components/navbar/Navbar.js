@@ -26,10 +26,11 @@ function Navbar() {
     updateSession();
     if (session.sessionActive) {
       const intervalId = setInterval(() => {
-        if (CookieService.getCookie() === null) {
+        if (CookieService.getJwtToken() === null) {
           LocalStorageService.logOut();
           navigate("/");
           RedirectService.reloadPage();
+          // TODO: Add modal to inform why user has been logout
         }
       }, 3000);
       return () => clearInterval(intervalId);
@@ -95,9 +96,9 @@ function Navbar() {
   };
 
   const updateSession = () => {
-    if (CookieService.getCookie() !== null) {
+    if (CookieService.getJwtToken() !== null) {
       dispatch({type: "signIn"});
-    } else if (CookieService.getCookie() === null) {
+    } else if (CookieService.getJwtToken() === null) {
       dispatch({type: "signOut"});
     }
   };

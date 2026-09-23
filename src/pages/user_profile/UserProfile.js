@@ -58,12 +58,12 @@ function UserProfile() {
         setUserFirstNameII(response.userFirstNameII);
         setUserLastNameI(response.userLastNameI);
         setUserLastNameII(response.userLastNameII);
-        if (response.userPhotoFileName.startsWith("profile-picture")) {
+        if (response.userPhotoFileName !== null && response.userPhotoFileName.startsWith("profile-picture")) {
           setDefaultUserPicture(response.userPhotoFileName);
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response ? error.response.data : error.message);
       });
   };
 

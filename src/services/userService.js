@@ -6,7 +6,7 @@ const BASE_URL = "http://localhost:8080/v1.0/authentication";
 
 const getUserData = () => {
   return axios.get(BASE_URL + "/user", {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;
@@ -18,7 +18,7 @@ const getUserData = () => {
 
 const saveUserData = (userData) => {
   return axios.put(BASE_URL + "/user", userData, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;
@@ -31,7 +31,7 @@ const saveUserData = (userData) => {
 const findUserToInvite = (userEmail) => {
   let companyId = LocalStorageService.getCurrentCompany();
   return axios.post(BASE_URL + `/company-member/${userEmail}`, companyId, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;

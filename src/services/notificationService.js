@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:8080/v1.0/notification";
 
 const sendInvitation = (data) => {
   return axios.post(BASE_URL + "/invite", data, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -19,7 +19,7 @@ const sendInvitation = (data) => {
 
 const sendMembershipPetition = (data) => {
   return axios.post(BASE_URL + "/membership-petition", data, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -31,7 +31,7 @@ const sendMembershipPetition = (data) => {
 
 const getUserNotification = () => {
   return axios.get(BASE_URL + "/get-user-notifications", {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;

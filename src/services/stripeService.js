@@ -6,7 +6,7 @@ const BASE_URL = "http://localhost:8080/v1.0/authentication";
 
 const createStripePaymentSession = (paymentDto) => {
   return axios.post(BASE_URL + "/create-payment", paymentDto, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -18,7 +18,7 @@ const createStripePaymentSession = (paymentDto) => {
 
 const cancelStripePaymentSession = (paymentIntentId) => {
   return axios.delete(BASE_URL + `/cancel-payment/${paymentIntentId}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -30,7 +30,7 @@ const cancelStripePaymentSession = (paymentIntentId) => {
 
 const updateUserMembership = (membership) => {
   return axios.put(BASE_URL + "/update-user-membership", {membership: membership}, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;

@@ -6,7 +6,7 @@ const BASE_URL = "http://localhost:8080/v1.0/document";
 
 const createNewFinancialStatement = (documentData) => {
   return axios.post(BASE_URL + `/create-financial-statement`, documentData, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -19,7 +19,7 @@ const createNewFinancialStatement = (documentData) => {
 const getAllCompanyDocuments = () => {
   let companyId = LocalStorageService.getCurrentCompany();
   return axios.get(BASE_URL + `/get-all/${companyId}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -31,7 +31,7 @@ const getAllCompanyDocuments = () => {
 
 const getDetailedCompanyDocument = (documentId) => {
   return axios.get(BASE_URL + `/${documentId}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -43,7 +43,7 @@ const getDetailedCompanyDocument = (documentId) => {
 
 const deleteCompanyDocument = (documentId) => {
   return axios.delete(BASE_URL + `/${documentId}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;

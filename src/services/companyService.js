@@ -41,7 +41,7 @@ const getCompanyDataFromKrsApi = (krsNumber) => {
 
 const checkIfCompanyAlreadyExist = (companyKrsNumber) => {
   return axios.get(BASE_URL + `/exist/${companyKrsNumber}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;
@@ -53,7 +53,7 @@ const checkIfCompanyAlreadyExist = (companyKrsNumber) => {
 
 const saveCompany = (companyDto) => {
   return axios.post(BASE_URL + "/create", companyDto, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;
@@ -65,7 +65,7 @@ const saveCompany = (companyDto) => {
 
 const getCurrentUserCompanies = () => {
   return axios.get(BASE_URL + "/current-user-companies", {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;
@@ -77,7 +77,7 @@ const getCurrentUserCompanies = () => {
 
 const getCompanyByCompanyId = (companyId) => {
   return axios.get(BASE_URL + `/details/${companyId}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;
@@ -89,7 +89,7 @@ const getCompanyByCompanyId = (companyId) => {
 
 const getCompanyByCompanyKrsNumber = (krsNumber) => {
   return axios.get(BASE_URL + `/get-by-krs/${krsNumber}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response;
@@ -101,7 +101,7 @@ const getCompanyByCompanyKrsNumber = (krsNumber) => {
 
 const getCompanyMembersByCompanyId = (companyId) => {
   return axios.get(BASE_URL + `/members-details/${companyId}`, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;

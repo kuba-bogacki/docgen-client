@@ -9,7 +9,7 @@ const BASE_URL = "http://localhost:8080/v1.0/authentication";
 
 const uploadProfilePhoto = (formData) => {
   return axios.post(BASE_URL + "/photo", formData, {
-    headers : CookieService.getCookie()
+    headers : CookieService.getJwtToken()
   })
     .then((response) => {
       return response.data;

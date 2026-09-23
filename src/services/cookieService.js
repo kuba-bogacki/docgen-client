@@ -3,41 +3,66 @@ import jwt from "jwt-decode";
 
 const cookie = new Cookies();
 
-const setCookie = (jwtResponseToken) => {
-  const decoded = jwt(jwtResponseToken);
-  cookie.set("jwtAuthenticationToken", jwtResponseToken, {expires : new Date(decoded.exp * 1000)});
+const setCookie = (authenticationResponse) => {
+  const jwtToken = authenticationResponse.jwtToken;
+  const refreshToken = authenticationResponse.refreshToken;
+  cookie.set("jwtAuthenticationToken", jwtToken, {
+    expires : new Date(jwt(jwtToken).exp * 1000)
+  });
+  cookie.set("jwtRefreshToken", refreshToken, {
+    expires : new Date(jwt(refreshToken).exp * 1000)
+  });
 };
 
-const getCookie = () => {
-  if (cookie.get("jwtAuthenticationToken") === undefined) {
+const getJwtToken = () => {
+  return getToken("jwtAuthenticationToken");
+};
+
+const getRefreshToken = () => {
+  return getToken("jwtRefreshToken");
+};
+
+const getToken = (tokenName) => {
+  if (cookie.get(tokenName) === undefined) {
     return null;
   } else {
-    return {'Authorization': 'Bearer ' + cookie.get("jwtAuthenticationToken")};
+    return {'Authorization': 'Bearer ' + cookie.get(tokenName)};
   }
 };
 
-const getCookieExpiration = () => {
-  if (cookie.get("jwtAuthenticationToken") === undefined) {
+const getJwtTokenExpiration = () => {
+  return getTokenExpiration("jwtAuthenticationToken");
+};
+
+const getRefreshTokenExpiration = () => {
+  return getTokenExpiration("jwtRefreshToken");
+};
+
+const getTokenExpiration = (tokenName) => {
+  if (cookie.get(tokenName) === undefined) {
     return null;
   } else {
-    return new Date(jwt(cookie.get("jwtAuthenticationToken")).exp * 1000);
+    return new Date(jwt(cookie.get(tokenName)).exp * 1000);
   }
 };
 
 const removeCookie = () => {
   cookie.remove("jwtAuthenticationToken");
+  cookie.remove("jwtRefreshToken");
 };
 
 const isLogIn = () => {
-  return cookie.get("jwtAuthenticationToken") !== undefined;
+  return cookie.get("jwtAuthenticationToken") !== undefined && cookie.get("jwtRefreshToken") !== undefined;
 };
 
 const CookieService = {
   setCookie,
-  getCookie,
+  getJwtToken,
+  getRefreshToken,
   removeCookie,
   isLogIn,
-  getCookieExpiration
+  getJwtTokenExpiration,
+  getRefreshTokenExpiration
 };
 
 export default CookieService;

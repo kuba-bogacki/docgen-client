@@ -12,7 +12,7 @@ function Footer() {
       <div className="info-section">
         <div className="info-section-block">
           <h2>Contact:</h2>
-          <p>E-mail : <a href="/#">naspolke.organizacja@gmail.com</a></p>
+          <p>E-mail : <a href="/#">for.company.document.generator@gmail.com</a></p>
           <p>Phone : <a href="/#">+ 48 510 330 651</a></p>
           <p>Fax : <a href="/#">+ 22 119 53 23 39</a></p>
           <p>Address : Ronald Regan Avenue 6, San Francisco, LA 94107</p>
@@ -40,7 +40,7 @@ function Footer() {
       </div>
       <hr className="footer-hr-line"></hr>
       <div className="footer-rights">
-        <p>© 2025 Bogacki. All rights reserved</p>
+        <p>© 2026 Bogacki. All rights reserved</p>
       </div>
     </footer>
   );

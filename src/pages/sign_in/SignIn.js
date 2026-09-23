@@ -65,7 +65,7 @@ function SignIn() {
   const getWebsocketUserPrincipal = () => {
     stompClient.publish({
       destination : "/app/get-principal-name",
-      headers : CookieService.getCookie()
+      headers : CookieService.getJwtToken()
     });
   };
 
@@ -83,7 +83,7 @@ function SignIn() {
       }
       authenticate
         .then((response) => {
-            if (response.status === 401) {
+            if (response.status === 401 || response.status === 404 || response.status === 405) {
             setProgressSendData(false);
             setModalTitle(ModalContent.signInWrongCredentialsTitle);
             setModalBody(response.data);

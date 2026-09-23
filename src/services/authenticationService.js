@@ -7,7 +7,7 @@ const signInToActivateAccount = (verificationCode, authenticationRequest) => {
   return axios.post(BASE_URL + `/verify/${verificationCode}`, authenticationRequest)
     .then((response) => {
       if (response.status === 200) {
-        CookieService.setCookie(response.data.jwtToken);
+        CookieService.setCookie(response.data);
       }
       return response;
     });
@@ -17,7 +17,7 @@ const signInToJoinToCompany = (companyId, authenticationRequest) => {
   return axios.post(BASE_URL + `/confirm-membership/${companyId}`, authenticationRequest)
     .then((response) => {
       if (response.status === 200) {
-        CookieService.setCookie(response.data.jwtToken);
+        CookieService.setCookie(response.data);
       }
       return response;
     });
@@ -27,7 +27,7 @@ const signIn = (authenticationRequest) => {
   return axios.post(BASE_URL + "/login", authenticationRequest)
     .then((response) => {
       if (response.status === 200) {
-        CookieService.setCookie(response.data.jwtToken);
+        CookieService.setCookie(response.data);
       }
       return response;
     })
