@@ -7,8 +7,8 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import {Button, CircularProgress} from "@mui/material";
 import {useState} from "react";
 import Modal from "../../components/modal/Modal";
-import AuthService from "../../services/authenticationService";
 import ModalContent from "../../constans/modalContent";
+import UserService from "../../services/userService";
 
 function ResetPassword() {
 
@@ -32,7 +32,7 @@ function ResetPassword() {
     setProgressSendData(true);
     let userData = new FormData();
     userData.append("userEmail", userEmail);
-    AuthService.sendResetLink(userData)
+    UserService.sendResetLink(userData)
       .then(() => {
         setProgressSendData(false);
         setModalTitle(ModalContent.successSendResetEmailTitle);

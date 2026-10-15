@@ -28,6 +28,10 @@ function Notification() {
     setNotifications(notificationArray => [...notificationArray, JSON.parse(newNotification.body)]);
   });
 
+  useSubscription("/user/queue/evidence-info", (newNotification) => {
+    setNotifications(notificationArray => [...notificationArray, JSON.parse(newNotification.body)]);
+  });
+
   const getNotifications = () => {
     NotificationService.getUserNotification()
       .then((response) => {
@@ -49,7 +53,6 @@ function Notification() {
   const showNotifications = (event) => {
     setAnchorEl(event.currentTarget);
     openNotification === true || notifications.length === 0 ? setOpenNotification(false) : setOpenNotification(true);
-    // notifications.length === 0 ? setOpenNotification(false) : setOpenNotification(true);
   };
 
   const closeNotification = () => {

@@ -69,7 +69,7 @@ function SendInvitation() {
               </span>
             </div>
           );
-        } else if (response.status === 208) {
+        } else if (response.status === 403) {
           setInvitationSend(
             <div className="send-invitation-response">
               <h3>

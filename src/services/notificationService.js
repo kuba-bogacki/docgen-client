@@ -1,7 +1,5 @@
 import axios from "axios";
 import CookieService from "./cookieService";
-import {useStompClient} from "react-stomp-hooks";
-import LocalStorageService from "./localStorageService";
 
 const BASE_URL = "http://localhost:8080/v1.0/notification";
 

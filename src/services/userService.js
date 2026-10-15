@@ -41,10 +41,37 @@ const findUserToInvite = (userEmail) => {
     })
 };
 
+const sendResetLink = (userData) => {
+  // TODO: all swallowing statuses (not errors, e.g. response with status 401, 403, 504) need to be handled properly
+  return axios.post(BASE_URL + "/send-email-to-reset-password", userData)
+    .then((response) => {
+      if (response.status === 200) {
+        return response;
+      }
+    })
+    .catch((error) => {
+      return error.response.data;
+    })
+};
+
+const resetPassword = (verificationCode, authenticationRequest) => {
+  return axios.post(BASE_URL + `/reset-password/${verificationCode}`, authenticationRequest)
+    .then((response) => {
+      if (response.status === 200) {
+        return response;
+      }
+    })
+    .catch((error) => {
+      return error.response.data;
+    })
+};
+
 const UserService = {
   getUserData,
   saveUserData,
-  findUserToInvite
+  findUserToInvite,
+  sendResetLink,
+  resetPassword
 };
 
 export default UserService;

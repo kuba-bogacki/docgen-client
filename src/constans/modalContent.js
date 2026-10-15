@@ -52,7 +52,11 @@ const modalContent = {
   userAlreadyCompanyMemberTitle : "Invalid membership request",
   userAlreadyCompanyMemberBody : "You are already part of company. Impossible to send membership petition once again.",
   userNotLoggedInTitle : "User not logged in",
-  userNotLoggedInBody : "If you would like to sign up for a membership, please log in to your account first."
+  userNotLoggedInBody : "If you would like to sign up for a membership, please log in to your account first.",
+  documentCreationInProgressTitle : "Creation in progress",
+  documentCreationInProgressBody : "Your new document is being prepared. We will notify you when it is ready.",
+  documentCreationFailureTitle : "Some problems occurs",
+  documentCreationFailureBody : "Unexpected issue appears when we trying to create document.",
 }
 
 export default modalContent;

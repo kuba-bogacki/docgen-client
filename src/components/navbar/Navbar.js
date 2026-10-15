@@ -15,6 +15,7 @@ import {useSubscription} from "react-stomp-hooks";
 import LocalStorageService from "../../services/localStorageService";
 import {useNavigate} from "react-router-dom";
 import RedirectService from "../../services/redirectionService";
+import AuthenticationService from "../../services/authenticationService";
 
 function Navbar() {
 
@@ -24,17 +25,24 @@ function Navbar() {
 
   useEffect(() => {
     updateSession();
-    if (session.sessionActive) {
-      const intervalId = setInterval(() => {
-        if (CookieService.getJwtToken() === null) {
-          LocalStorageService.logOut();
-          navigate("/");
-          RedirectService.reloadPage();
-          // TODO: Add modal to inform why user has been logout
-        }
-      }, 3000);
-      return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    if (!session.sessionActive) {
+      return;
     }
+
+    const intervalId = setInterval(() => {
+      if (!CookieService.getJwtToken()) {
+        dispatch({ type: "signOut" });
+        LocalStorageService.logOut();
+        navigate("/");
+        RedirectService.reloadPage();
+        // TODO: Add modal to inform why user has been logout
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalId);
   }, [session.sessionActive]);
 
   useSubscription("/user/queue/refresh-token", (refreshToken) => {
@@ -90,13 +98,14 @@ function Navbar() {
     setMenuListClassName("navbar-menu-list");
     if (sessionState === "signOut") {
       dispatch({type: sessionState});
+      AuthenticationService.signOut();
       CookieService.removeCookie();
       LocalStorageService.logOut();
     }
   };
 
   const updateSession = () => {
-    if (CookieService.getJwtToken() !== null) {
+    if (CookieService.getJwtToken()) {
       dispatch({type: "signIn"});
     } else if (CookieService.getJwtToken() === null) {
       dispatch({type: "signOut"});

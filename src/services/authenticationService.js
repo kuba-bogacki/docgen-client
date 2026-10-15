@@ -46,37 +46,24 @@ const signUp = (registerRequest) => {
     })
 };
 
-const sendResetLink = (userData) => {
-  return axios.post(BASE_URL + "/send-email-to-reset-password", userData)
+const signOut = () => {
+  return axios.patch(BASE_URL + "/logout", {}, {
+    headers : CookieService.getJwtToken()
+  })
     .then((response) => {
-      if (response.status === 200) {
-        return response;
-      }
+      return response;
     })
     .catch((error) => {
-      return error.response.data;
-    })
-};
-
-const resetPassword = (verificationCode, authenticationRequest) => {
-  return axios.post(BASE_URL + `/reset-password/${verificationCode}`, authenticationRequest)
-    .then((response) => {
-      if (response.status === 200) {
-        return response;
-      }
-    })
-    .catch((error) => {
-      return error.response.data;
+      return error.response;
     })
 };
 
 const AuthService = {
   signInToJoinToCompany,
   signInToActivateAccount,
-  sendResetLink,
-  resetPassword,
   signUp,
-  signIn
+  signIn,
+  signOut
 };
 
 export default AuthService;

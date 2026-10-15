@@ -1,6 +1,6 @@
 import "./CompanyFilesStyle.css";
 import Box from '@mui/material/Box';
-import SearchIcon from '@mui/icons-material/Search';
+import YoutubeSearchedForIcon from '@mui/icons-material/YoutubeSearchedFor';
 import CreateIcon from '@mui/icons-material/Create';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
@@ -16,9 +16,14 @@ import {DateField} from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import Modal from "../../../components/modal/Modal";
+import ModalContent from "../../../constans/modalContent";
 
 function CompanyFiles() {
 
+  const [creationInProgressModalTitle, setCreationInProgressModalTitle] = useState("");
+  const [creationInProgressModalBody, setCreationInProgressModalBody] = useState("");
+  const [creationInProgressModalOpen, setCreationInProgressModalOpen] = useState(false);
   const [documentDetailsModalOpen, setDocumentDetailsModalOpen] = useState(false);
   const [financialStatementModalOpen, setFinancialStatementModalOpen] = useState(false);
   const [isCreateMode, setIsCreateMode] = useState(true);
@@ -124,6 +129,19 @@ function CompanyFiles() {
     return URL.createObjectURL(blob);
   };
 
+  const displayCreationInProgressModal = (view) => {
+    setCreationInProgressModalOpen(view);
+  };
+
+  const showDocumentTemplates = () => {
+    setIsCreateMode(true);
+  };
+
+  const showExistingDocument = () => {
+    getCompanyDocuments();
+    setIsCreateMode(false);
+  };
+
   const showDocumentsDetails = (documentId) => {
     DocumentService.getDetailedCompanyDocument(documentId)
       .then((response) => {
@@ -185,18 +203,24 @@ function CompanyFiles() {
       supervisoryBoardMembers : supervisoryBoardMembers
     };
 
+    setFinancialStatementModalOpen(false);
+
     DocumentService.createNewFinancialStatement(documentData)
       .then((response) => {
         if (response.status === 201) {
-          getCompanyDocuments();
+          setCreationInProgressModalTitle(ModalContent.documentCreationInProgressTitle);
+          setCreationInProgressModalBody(ModalContent.documentCreationInProgressBody);
+          displayCreationInProgressModal(true);
         }
       })
       .catch((error) => {
         console.log(error);
+        setCreationInProgressModalTitle(ModalContent.documentCreationFailureTitle);
+        setCreationInProgressModalBody(ModalContent.documentCreationFailureBody);
+        displayCreationInProgressModal(true);
       });
 
     eraseStates();
-    setFinancialStatementModalOpen(false);
   };
 
   return (
@@ -208,9 +232,9 @@ function CompanyFiles() {
       <main className="company-files-body">
         <div className="company-files-navigation-box">
           <CreateIcon fontSize="large" className={`company-files-icon-container ${isCreateMode ? "company-files-icon-picked" : ""}`}
-            onClick={() => setIsCreateMode(true)}/>
-          <SearchIcon fontSize="large" className={`company-files-icon-container ${isCreateMode ? "" : "company-files-icon-picked"}`}
-            onClick={() => setIsCreateMode(false)}/>
+            onClick={() => showDocumentTemplates()}/>
+          <YoutubeSearchedForIcon fontSize="large" className={`company-files-icon-container ${isCreateMode ? "" : "company-files-icon-picked"}`}
+            onClick={() => showExistingDocument()}/>
         </div>
         <div className="company-files-generator-box">
           {isCreateMode ? (
@@ -297,6 +321,7 @@ function CompanyFiles() {
           </Dialog>
         </div>
       }
+      {creationInProgressModalOpen && <Modal modalTitle={creationInProgressModalTitle} modalBody={creationInProgressModalBody} displayModal={displayCreationInProgressModal}/>}
     </div>
   );
 }

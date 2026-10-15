@@ -8,9 +8,9 @@ import {Button, CircularProgress} from "@mui/material";
 import {useState} from "react";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import Modal from "../../components/modal/Modal";
-import AuthService from "../../services/authenticationService";
 import ModalContent from "../../constans/modalContent";
 import RedirectService from "../../services/redirectionService";
+import UserService from "../../services/userService";
 
 function ChangePassword() {
 
@@ -50,7 +50,7 @@ function ChangePassword() {
     setProgressSendData(true);
     let userEmail = queryParameters.get("user-email");
     let authenticationRequest = {userEmail, userPassword};
-    AuthService.resetPassword(queryParameters.get("user-verification-code"), authenticationRequest)
+    UserService.resetPassword(queryParameters.get("user-verification-code"), authenticationRequest)
       .then(() => {
         setProgressSendData(false);
         setModalTitle(ModalContent.successResetPasswordTitle);

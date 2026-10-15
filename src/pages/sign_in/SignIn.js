@@ -83,7 +83,7 @@ function SignIn() {
       }
       authenticate
         .then((response) => {
-            if (response.status === 401 || response.status === 404 || response.status === 405) {
+            if (response.status === 401 || response.status === 403 || response.status === 404 || response.status === 405) {
             setProgressSendData(false);
             setModalTitle(ModalContent.signInWrongCredentialsTitle);
             setModalBody(response.data);
