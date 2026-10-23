@@ -25,8 +25,9 @@ pipeline {
             steps {
                 script {
                     def imageName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:${env.IMAGE_TAG}"
+                    def latestName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:latest"
                     sh """
-                        docker build -t ${imageName} -f Dockerfile .
+                        docker build -t ${imageName} -t ${latestName} -f Dockerfile .
                     """
                 }
             }
@@ -37,8 +38,9 @@ pipeline {
                 script {
                     docker.withRegistry("${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS}") {
                         def imageName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:${env.IMAGE_TAG}"
+                        def latestName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:latest"
                         docker.image(imageName).push()
-                        docker.image('latest').push()
+                        docker.image(latestName).push()
                     }
                 }
             }
