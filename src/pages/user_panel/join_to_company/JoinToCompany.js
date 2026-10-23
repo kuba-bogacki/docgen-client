@@ -73,7 +73,7 @@ function JoinToCompany() {
       stompClient.publish({
         destination : "/app/send-membership-petition",
         body : JSON.stringify(data),
-        headers : CookieService.getJwtToken()
+        headers : CookieService.getAccessToken()
       });
 
       setModalTitle(ModalContent.successfullyMembershipPetitionTitle);

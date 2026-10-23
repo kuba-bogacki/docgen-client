@@ -1,0 +1,10 @@
+http://localhost {
+
+    handle /api/* {
+        reverse_proxy api-gateway:8080
+    }
+
+    handle /* {
+        reverse_proxy web-frontend:80
+    }
+}

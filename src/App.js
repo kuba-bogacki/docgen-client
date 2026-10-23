@@ -20,12 +20,13 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Faq from "./pages/faq/Faq";
 import {StompSessionProvider} from "react-stomp-hooks";
+import ApiService from "./services/apiService";
 
 function App() {
 
   return (
     <div className="app-container">
-      <StompSessionProvider url="http://localhost:8080/v1.0/notification/websocket">
+      <StompSessionProvider url={ApiService.buildApiUrl("/api/v1.0/notification/websocket")}>
         <Router>
           <Navbar/>
             <Routes>

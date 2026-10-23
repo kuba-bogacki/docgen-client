@@ -1,12 +1,13 @@
 import axios from "axios";
 import CookieService from "./cookieService";
 import LocalStorageService from "./localStorageService";
+import ApiService from "./apiService";
 
-const BASE_URL = "http://localhost:8080/v1.0/authentication";
+const BASE_URL = ApiService.buildApiUrl("/api/v1.0/authentication");
 
 const getUserData = () => {
   return axios.get(BASE_URL + "/user", {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;
@@ -18,7 +19,7 @@ const getUserData = () => {
 
 const saveUserData = (userData) => {
   return axios.put(BASE_URL + "/user", userData, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;
@@ -31,7 +32,7 @@ const saveUserData = (userData) => {
 const findUserToInvite = (userEmail) => {
   let companyId = LocalStorageService.getCurrentCompany();
   return axios.post(BASE_URL + `/company-member/${userEmail}`, companyId, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;

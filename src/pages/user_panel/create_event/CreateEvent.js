@@ -160,7 +160,7 @@ function CreateEvent() {
     stompClient.publish({
       destination : "/app/send-new-event-info",
       body : JSON.stringify(data),
-      headers : CookieService.getJwtToken()
+      headers : CookieService.getAccessToken()
     });
   };
 

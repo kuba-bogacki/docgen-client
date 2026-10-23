@@ -1,7 +1,8 @@
 import axios from "axios";
 import CookieService from "./cookieService";
+import ApiService from "./apiService";
 
-const BASE_URL = "http://localhost:8080/v1.0/authentication";
+const BASE_URL = ApiService.buildApiUrl("/api/v1.0/authentication");
 
 const signInToActivateAccount = (verificationCode, authenticationRequest) => {
   return axios.post(BASE_URL + `/verify/${verificationCode}`, authenticationRequest)
@@ -48,7 +49,7 @@ const signUp = (registerRequest) => {
 
 const signOut = () => {
   return axios.patch(BASE_URL + "/logout", {}, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;

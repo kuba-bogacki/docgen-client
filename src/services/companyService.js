@@ -1,9 +1,10 @@
 import axios from "axios";
 import CookieService from "./cookieService";
 import UtilityService from "./utilityService";
+import ApiService from "./apiService";
 
-const companyType = "SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ";
-const BASE_URL = "http://localhost:8080/v1.0/company";
+const COMPANY_TYPE = "SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ";
+const BASE_URL = ApiService.buildApiUrl("/api/v1.0/company");
 
 const fetchCompanyData = (responseData) => {
   return {
@@ -28,7 +29,7 @@ const fetchCompanyData = (responseData) => {
 const getCompanyDataFromKrsApi = (krsNumber) => {
   return axios.get(`https://api-krs.ms.gov.pl/api/krs/OdpisAktualny/${krsNumber}?rejestr=P&format=json`)
     .then((response) => {
-      if (response.data.odpis.dane.dzial1.danePodmiotu.formaPrawna === companyType) {
+      if (response.data.odpis.dane.dzial1.danePodmiotu.formaPrawna === COMPANY_TYPE) {
         return fetchCompanyData(response.data);
       } else {
         return "Not a limited liability company";
@@ -41,7 +42,7 @@ const getCompanyDataFromKrsApi = (krsNumber) => {
 
 const checkIfCompanyAlreadyExist = (companyKrsNumber) => {
   return axios.get(BASE_URL + `/exist/${companyKrsNumber}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;
@@ -53,7 +54,7 @@ const checkIfCompanyAlreadyExist = (companyKrsNumber) => {
 
 const saveCompany = (companyDto) => {
   return axios.post(BASE_URL + "/create", companyDto, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;
@@ -65,7 +66,7 @@ const saveCompany = (companyDto) => {
 
 const getCurrentUserCompanies = () => {
   return axios.get(BASE_URL + "/current-user-companies", {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;
@@ -77,7 +78,7 @@ const getCurrentUserCompanies = () => {
 
 const getCompanyByCompanyId = (companyId) => {
   return axios.get(BASE_URL + `/details/${companyId}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;
@@ -89,7 +90,7 @@ const getCompanyByCompanyId = (companyId) => {
 
 const getCompanyByCompanyKrsNumber = (krsNumber) => {
   return axios.get(BASE_URL + `/get-by-krs/${krsNumber}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;
@@ -101,7 +102,7 @@ const getCompanyByCompanyKrsNumber = (krsNumber) => {
 
 const getCompanyMembersByCompanyId = (companyId) => {
   return axios.get(BASE_URL + `/members-details/${companyId}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response.data;

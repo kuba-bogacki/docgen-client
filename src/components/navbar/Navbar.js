@@ -33,7 +33,7 @@ function Navbar() {
     }
 
     const intervalId = setInterval(() => {
-      if (!CookieService.getJwtToken()) {
+      if (!CookieService.getAccessToken()) {
         dispatch({ type: "signOut" });
         LocalStorageService.logOut();
         navigate("/");
@@ -105,9 +105,9 @@ function Navbar() {
   };
 
   const updateSession = () => {
-    if (CookieService.getJwtToken()) {
+    if (CookieService.getAccessToken()) {
       dispatch({type: "signIn"});
-    } else if (CookieService.getJwtToken() === null) {
+    } else if (CookieService.getAccessToken() === null) {
       dispatch({type: "signOut"});
     }
   };

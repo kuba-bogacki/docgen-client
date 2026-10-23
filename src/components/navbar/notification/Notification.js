@@ -73,7 +73,7 @@ function Notification() {
     stompClient.publish({
       destination : "/app/accept-membership-petition",
       body : JSON.stringify(data),
-      headers : CookieService.getJwtToken()
+      headers : CookieService.getAccessToken()
     });
     removeFromNotificationsArray(notification.notificationId);
     showNotifications(event);
@@ -83,7 +83,7 @@ function Notification() {
     stompClient.publish({
       destination : "/app/delete-notification",
       body : notification.notificationId,
-      headers : CookieService.getJwtToken()
+      headers : CookieService.getAccessToken()
     });
     removeFromNotificationsArray(notification.notificationId);
     showNotifications(event);

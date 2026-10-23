@@ -1,12 +1,13 @@
 import LocalStorageService from "./localStorageService";
 import CookieService from "./cookieService";
 import axios from "axios";
+import ApiService from "./apiService";
 
-const BASE_URL = "http://localhost:8080/v1.0/document";
+const BASE_URL = ApiService.buildApiUrl("/api/v1.0/document");
 
 const createNewFinancialStatement = (documentData) => {
   return axios.post(BASE_URL + `/create-financial-statement`, documentData, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;
@@ -19,7 +20,7 @@ const createNewFinancialStatement = (documentData) => {
 const getAllCompanyDocuments = () => {
   let companyId = LocalStorageService.getCurrentCompany();
   return axios.get(BASE_URL + `/get-all/${companyId}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;
@@ -31,7 +32,7 @@ const getAllCompanyDocuments = () => {
 
 const getDetailedCompanyDocument = (documentId) => {
   return axios.get(BASE_URL + `/${documentId}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;
@@ -43,7 +44,7 @@ const getDetailedCompanyDocument = (documentId) => {
 
 const deleteCompanyDocument = (documentId) => {
   return axios.delete(BASE_URL + `/${documentId}`, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;

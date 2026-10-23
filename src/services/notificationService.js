@@ -1,11 +1,12 @@
 import axios from "axios";
 import CookieService from "./cookieService";
+import ApiService from "./apiService";
 
-const BASE_URL = "http://localhost:8080/v1.0/notification";
+const BASE_URL = ApiService.buildApiUrl("/api/v1.0/notification");
 
 const sendInvitation = (data) => {
   return axios.post(BASE_URL + "/invite", data, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;
@@ -17,7 +18,7 @@ const sendInvitation = (data) => {
 
 const sendMembershipPetition = (data) => {
   return axios.post(BASE_URL + "/membership-petition", data, {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;
@@ -29,7 +30,7 @@ const sendMembershipPetition = (data) => {
 
 const getUserNotification = () => {
   return axios.get(BASE_URL + "/get-user-notifications", {
-    headers : CookieService.getJwtToken()
+    headers : CookieService.getAccessToken()
   })
     .then((response) => {
       return response;

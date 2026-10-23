@@ -27,6 +27,7 @@ function CheckoutForm({membership, displayPayment}) {
       stripe.confirmPayment({
         elements: elements,
         confirmParams: {
+          // TODO: need to be update dynamically, not hardcoded
           return_url: "http://localhost:3000/user-panel",
         }
       }).then(() => {});

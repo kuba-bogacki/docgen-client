@@ -65,7 +65,7 @@ function SignIn() {
   const getWebsocketUserPrincipal = () => {
     stompClient.publish({
       destination : "/app/get-principal-name",
-      headers : CookieService.getJwtToken()
+      headers : CookieService.getAccessToken()
     });
   };
 
