@@ -38,6 +38,7 @@ pipeline {
                     docker.withRegistry("${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS}") {
                         def imageName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:${env.IMAGE_TAG}"
                         docker.image(imageName).push()
+                        docker.image('latest').push()
                     }
                 }
             }
