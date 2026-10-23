@@ -14,13 +14,20 @@ pipeline {
                 git credentialsId: 'd1a07e22-e482-4351-88a6-2f40c9a760a9',
                     url: 'https://github.com/kuba-bogacki/docgen-client',
                     branch: 'main'
+                script {
+                    def shortCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    env.IMAGE_TAG = "${env.BUILD_NUMBER}-${shortCommit}"
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKER_NAMESPACE}/${IMAGE_NAME}")
+                    def imageName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:${env.IMAGE_TAG}"
+                    sh """
+                        docker build -t ${imageName} -f Dockerfile .
+                    """
                 }
             }
         }
@@ -29,7 +36,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS}") {
-                        dockerImage.push('latest')
+                        def imageName = "${DOCKER_NAMESPACE}/${IMAGE_NAME}:${env.IMAGE_TAG}"
+                        docker.image(imageName).push()
                     }
                 }
             }
