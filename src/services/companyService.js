@@ -23,6 +23,7 @@ const fetchCompanyData = (responseData) => {
       addressCity: UtilityService.customCompanyData(responseData.odpis.dane.dzial1.siedzibaIAdres.adres.miejscowosc)
     },
     companyShareCapital: UtilityService.parseShareCapital(responseData.odpis.dane.dzial1.kapital.wysokoscKapitaluZakladowego.wartosc),
+    companyMembers: []
   };
 };
 
