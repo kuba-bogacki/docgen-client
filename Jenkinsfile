@@ -5,6 +5,7 @@ pipeline {
         DOCKER_CREDENTIALS = 'a7d50e5c-36b3-464f-aa85-81d0a498ce09'
         DOCKER_REGISTRY    = 'https://registry.hub.docker.com'
         DOCKER_NAMESPACE   = 'spaceavocado34'
+        SSH_KEY_NAME       = 'vps-ssh-key'
         IMAGE_NAME         = 'web-frontend'
     }
 
@@ -42,6 +43,21 @@ pipeline {
                         docker.image(imageName).push()
                         docker.image(latestName).push()
                     }
+                }
+            }
+        }
+
+        stage('Deploy to Virtual Private Server') {
+            steps {
+                sshagent(["${SSH_KEY_NAME}"]) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no ubuntu@213.32.18.90 '
+                            cd ~/docgen && \
+                            docker compose pull web-frontend && \
+                            docker compose up -d web-frontend && \
+                            docker image prune -f
+                        '
+                    """
                 }
             }
         }
