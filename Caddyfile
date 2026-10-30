@@ -1,6 +1,6 @@
 http://localhost {
 
-    handle /api/* {
+    handle /api/v1.0/* {
         reverse_proxy api-gateway:8080
     }
 

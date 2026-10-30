@@ -10,6 +10,7 @@ function CheckoutForm({membership, displayPayment}) {
   const elements = useElements();
 
   const updateUserMembership = (membership) => {
+    // TODO: React properly on payment status (card fraud, card valid, etc.)
     StripeService.updateUserMembership(membership)
       .then(response => {
         if (response.status === 200) {
