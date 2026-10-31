@@ -13,9 +13,8 @@ function Footer() {
         <div className="info-section-block">
           <h2>Contact:</h2>
           <p>E-mail : <a href="/#">for.company.document.generator@gmail.com</a></p>
-          <p>Phone : <a href="/#">+ 48 510 330 651</a></p>
-          <p>Fax : <a href="/#">+ 22 119 53 23 39</a></p>
-          <p>Address : Ronald Regan Avenue 6, San Francisco, LA 94107</p>
+          <p>Phone : <a href="/#">+ 48 101 010 101</a></p>
+          <p>Fax : <a href="/#">+ 22 101 01 10 01</a></p>
         </div><hr/>
         <div className="info-section-block">
           <h2>Links:</h2>

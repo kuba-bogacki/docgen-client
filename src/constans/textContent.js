@@ -20,23 +20,22 @@ const textContent =
     aboutSubtitle : "We are a small company with big ambitions. We are constantly developing so that keeping records " +
       "in your company is just a formality.",
     aboutHeaderOne : "Qualified Legal Attorneys",
-    aboutParagraphOne : "Our criminal defense attorneys will protect your rights in court. Lorem ipsum dolor amet, " +
-      "adipiscing, diam nonummy nibh.",
+    aboutParagraphOne : "Our criminal defense attorneys will protect your rights in court. " +
+      "We offer strategic defense, personalized attention, and dedicated representation to achieve the best outcome for your case.",
     aboutHeaderTwo : "Over 20 Years of Experience",
-    aboutParagraphTwo : "With over 20 years of experience we assure you that you can trust us. Lorem ipsum dolor " +
-      "sit amet, consectetuer adipiscing elit.",
+    aboutParagraphTwo : "With over 20 years of experience we assure you that you can trust us. " +
+      "Our deep knowledge of the legal system and proven track record ensure your defense is in capable hands.",
     aboutHeaderThree : "Our Awards and Certificates",
-    aboutParagraphThree : "We have received more than 350 jury and court trial victories. Lorem ipsum dolor sit amet, " +
-      "consectetuer adipiscing elit.",
+    aboutParagraphThree : "We have received more than 350 jury and court trial victories. " +
+      "Recognition from prestigious legal associations reflects our unwavering commitment to justice and excellence in the courtroom.",
     servicesSubtitle : "Our comprehensive business solution is dedicated to both companies of all sizes and law firms.",
     carouselServices : "When an individual passes away, his or her estate will go through a legal " +
       "proceeding referred to as probate administration. Litigation practice " +
       "combines experience of attorneys from Health Law, Employment, " +
       "Commercial and Personal Injury Litigation.",
-    carouselOffer : "When an individual passes away, his or her estate will go through a legal " +
-      "proceeding referred to as probate administration. Litigation practice " +
-      "combines experience of attorneys from Health Law, Employment, " +
-      "Commercial and Personal Injury Litigation.",
+    carouselOffer : "Our comprehensive business solution is dedicated to both companies of all sizes and law firms. " +
+      "We deliver strategic counsel to optimize operations and mitigate regulatory risks. " +
+      "Our tailored services ensure compliance while driving sustainable corporate growth.",
     priceSubtitle : "We have prepared price offers for our service tailored to every pocket and the needs " +
       "of our customers.",
     silverPackageTitle : "Silver Package",
@@ -55,8 +54,8 @@ const textContent =
         "Access to the meeting organizer and calendar", "24/7 technical support"
       ],
     paragraphOne :
-      ["Regulations - these regulations.", "Website - the website of the 'For company' website operating at https://naspolke.com.",
-        "Service Provider - the company 'For company' with the registered office address: Al. KEN 36 / 112B, WARSAW, NIP: 9482256434.",
+      ["Regulations - these regulations.", "Website - the website of the 'For company' website operating at https://forcompany.org.pl",
+        "Service Provider - the company 'For company' with the registered office address: Al. Lorem Ipsum 21 / 37, WARSAW, NIP: 0101010101.",
         "Service Recipient - any natural person accessing the Website and using the services provided via the Website by the Service Provider.",
         "Communication by Electronic Means - Communication between the parties via electronic mail (e-mail) and contact forms available on the website."
       ],
@@ -136,7 +135,7 @@ const textContent =
         "The Service Provider reserves the right to disable the Website permanently, without prior notice to the Service Recipients.",
         "The Service Provider reserves the right to assign, in part or in full, all its rights and obligations related to the Website, without the consent and possibility of expressing any objections by the Service Recipients.",
         "The current and previous Regulations of the Website can be found on this subpage under the current Regulations.",
-        "In all matters related to the operation of the Website, please contact the Service Provider using the contact form available on the Website, by sending a message to the following e-mail address: naspolke.organizacja@gmail.com, and by telephone to the number: +48 733 644 002.",
+        "In all matters related to the operation of the Website, please contact the Service Provider using the contact form available on the Website, by sending a message to the following e-mail address: for.company.document.generator@gmail.com, and by telephone to the number: +48 101 010 101.",
         "Contact using the indicated means of communication only in matters related to the Website."
       ],
     questionOne : "Can I set up an account if I do not belong to any company?",
